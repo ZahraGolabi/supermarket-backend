@@ -1,0 +1,45 @@
+:root {
+  --clr-primary: #fa5800;
+  --clr-primary-main: #314ffe;
+  --color-orange: #ff8847;
+  --clr-white: #fff;
+  --clr-grey-1: #ebecf2;
+  --clr-gray: #686c79;
+  --clr-grey-3: #757575;
+  --clr-natural1: #e7e5e4;
+  --clr-natural2: #1c1c1c;
+  --clr-natural3: #b3b3b3;
+  --clr-natural4: #e6e6e6;
+  --color-neutral-container: #f2f2f2;
+  --clr-success: #22c55e;
+  --clr-border: #e5e7eb;
+  --clr-border-light: rgb(230, 230, 230);
+  --clr-bluelight: #eeefff;
+  --clr-border-medium: rgb(204, 204, 204);
+  --ff-primary: "IRANSans", sans-serif;
+  --border-radius: 1.5rem;
+  --border-radius-1: 12px;
+  --clr-pagnation: #ffffff1f;
+  --clr-black: #3c4151;
+  --background-color: rgb(242, 242, 242);
+  --font-color: rgba(0, 0, 0, 0.88);
+  --transition: all 0.3s ease;
+  --box-shadow: rgba(28, 28, 28, 0.3) 0px 0px 6px 0px;
+  --box-shadow-accent: 2px 0 0 0 #05bea7;
+  --shadow-elevation-low: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  --background-linear: linear-gradient(
+    181deg,
+    rgb(250 88 0) 7%,
+    rgb(250 88 0 / 61%) 30%,
+    rgb(250 88 0 / 26%) 60%,
+    rgb(250 88 0 / 0%) 100%
+  );
+  --background-linear-blu: linear-gradient(
+    181deg,
+    #314ffe 7%,
+    rgba(49, 79, 254, 0.61) 30%,
+    rgba(49, 79, 254, 0.26) 60%,
+    rgba(49, 79, 254, 0) 100%
+  );
+  --swipper-pagnation: rgba(255, 255, 255, 0.35);
+}

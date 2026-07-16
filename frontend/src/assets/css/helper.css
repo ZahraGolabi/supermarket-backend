@@ -1,0 +1,72 @@
+/* ---------- d-flex (display: flex) ---------- */
+.main-nav,
+.menu-toggle,
+.brand-logo,
+.nav-menu,
+.mobile-nav-link, 
+.nav-link,
+.service-dropdown,
+.service-card,
+.mobile-dropdown-content,
+.app-download-badges,
+.hero-container,
+.hero-form,
+.services-showcase-main,
+.super-app-wrapper,
+.super-app-bottom-wrapper,
+.registration-article-wrapper,
+.footer-snapp-social,
+.app-badges-wrapper,
+.super-app-bottom-icon {
+  display: flex;
+}
+
+/* ---------- align-center (align-items: center) ---------- */
+.nav-menu,
+.brand-logo,
+.menu-toggle,
+.mobile-nav-link, 
+.nav-link,
+.service-dropdown,
+.service-card,
+.app-download-badges,
+.hero-form,
+.services-showcase-main,
+.super-app-wrapper,
+.super-app-bottom-wrapper,
+.registration-article-wrapper,
+.footer-snapp-social,
+.app-badges-wrapper,
+.super-app-bottom-icon {
+  align-items: center;
+}
+
+/* ---------- align-stretch (align-items: stretch) ---------- */
+.hero-container {
+  align-items: stretch;
+}
+
+/* ---------- justify-center (justify-content: center) ---------- */
+.service-dropdown,
+.menu-toggle,
+.brand-logo,
+.services-showcase-main,
+.registration-article-wrapper,
+.footer-snapp-social,
+.app-download-badges,
+.app-badges-wrapper,
+.super-app-bottom-icon {
+  justify-content: center;
+}
+
+/* ---------- justify-around (justify-content: space-around) ---------- */
+.nav-menu,
+.app-badges-wrapper {
+  justify-content: space-around;
+}
+
+/* ---------- justify-evenly (justify-content: space-evenly) ---------- */
+.super-app-bottom-wrapper,
+.footer-snapp-social {
+  justify-content: space-evenly;
+}
