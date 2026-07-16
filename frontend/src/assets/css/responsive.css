@@ -1,0 +1,184 @@
+@media only screen and (max-width: 1200px) {
+  .nav-menu {
+    padding: 0;
+  }
+
+  .super-app-bottom-wrapper {
+    margin: 0;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .main-nav {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 0.5rem 0;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-link {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-item:hover .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .brand-logo {
+    padding-left: 1rem;
+  }
+
+  .nav__btn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-media {
+    display: none;
+  }
+
+  .hero-content {
+    flex-basis: 100%;
+  }
+
+  .hero-content-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .hero-footer-note {
+    width: 92%;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .super-app-bottom-wrapper {
+    position: relative;
+  }
+
+  .super-app-banner,
+  .super-app-content {
+    flex-basis: 80%;
+    margin: 0 auto;
+  }
+  .swiper-slide{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+  }
+
+  .hero-content,
+  .hero-media {
+    flex-basis: 100%;
+  }
+
+  .hero-title {
+    width: 85%;
+  }
+
+  .hero-title,
+  .hero-description,
+  .hero-form {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .hero-content-inner {
+    align-items: flex-start;
+  }
+
+  .hero-footer-note {
+    width: 50%;
+    margin: 1rem;
+  }
+
+  .super-app-bottom {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .hero-title,
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .registration-article-wrapper {
+    padding: 1rem;
+  }
+
+  .service-card {
+    width: 10rem;
+  }
+
+  .service-card__subtitle {
+    display: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .hero-footer-note {
+    width: fit-content;
+    padding: 0 1rem;
+  }
+
+  .hero-form {
+    gap: 1rem;
+  }
+
+  .submit-link {
+    width: 60%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .app-badges-wrapper {
+    padding: 1rem 0.5rem;
+  }
+
+  .app-badges-wrapper-continer {
+    width: 137px;
+    margin-bottom: 1rem;
+  }
+
+  .app-badges-wrapper-continer svg {
+    height: 50px;
+  }
+
+  .super-app-bottom-item {
+    margin: 0;
+  }
+
+  .app-download-badges {
+    padding: 0;
+  }
+  
+  .footer-link {
+    width: 100%;
+  }
+  .hero-banner__wrapper{
+  
+aspect-ratio:12/4;
+  }
+  .slider-dots {
+bottom: 5px;
+  }
+}

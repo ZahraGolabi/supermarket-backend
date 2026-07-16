@@ -1,0 +1,146 @@
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  .basket {
+    display: none;
+  }
+  .banner-slider .swiper-slide__top {
+    max-width: 700px;
+    max-height: 340px;
+  }
+  .parent-header {
+    padding: 0 0.75rem;
+  }
+  .banner-slider,
+  .header-search__input {
+    font-size: 0.8rem;
+  }
+
+  .banner-product__info {
+    display: flex;
+    align-items: center;
+    margin: 0 !important;
+    width: fit-content !important;
+  }
+
+ 
+.wapper-shop-card.grid-2 .shop-card {
+  flex: 0 0 calc(50% - 0px);
+  max-width: calc(50% - 0px);
+}
+
+.wapper-shop-card.grid-2 .shop-card:nth-child(2n + 1) {
+  border-right: none; 
+}
+
+.wapper-shop-card.grid-2 .shop-card:nth-child(2n) {
+  border-right: 2px solid var(--clr-border); 
+}
+
+.wapper-shop-card.grid-2 .shop-card:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.wapper-shop-card.grid-2 .shop-card:last-child {
+  border-bottom: none; 
+}
+
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+  .header-location {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  .pro-shop-badge {
+    flex-wrap: wrap;
+  }
+  .wapper-shop-card.grid-1 {
+  flex-direction: column; 
+}
+
+.wapper-shop-card.grid-1 .shop-card {
+  flex: 0 0 100%; 
+  max-width: 100%;
+  border-right: none; 
+  border-bottom: 2px solid var(--clr-border); 
+}
+
+.wapper-shop-card.grid-1 .shop-card:last-child {
+  border-bottom: none; 
+}
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+  .parent-header {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 0;
+    gap: 0;
+  }
+
+  .header-logo {
+    margin: 0 auto;
+  }
+  .header-location {
+    display: none;
+  }
+  .banner-slider {
+    margin-top: 4.5rem;
+  }
+
+  .header-search__input {
+    height: 3rem;
+    font-size: 13px;
+  }
+  .login {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+  }
+  .swiper-slid__top-pagination {
+    top: -1rem !important;
+  }
+  .brand-top{
+    justify-content: flex-start;
+        padding: 1rem
+  }
+  .brand-logo-link{
+    margin: 0 auto;
+  }
+  .brand-copyright{
+        padding: 2rem 0px 2rem;
+        padding:0 1rem;
+  }
+  .footer-links-section{
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .banner-product__header {
+    padding: 0 7px;
+  }
+  .product-title {
+    font-size: 14px;
+  }
+  .banner-product__more-btn {
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .pro-shop-badge {
+    display: none;
+  }
+}

@@ -1,0 +1,176 @@
+@import "reset.css";
+@import "font.css";
+@import "deafult.css";
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "IRANSans";
+}
+
+.icon {
+  display: none;
+}
+
+.wrapper-login {
+  padding: 40px 75px;
+  border-radius: 16px;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+}
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-title {
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.form {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-direction: column;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.input-phone {
+  padding: 7px 11px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  height: 48px;
+  background-color: #ffffff;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: "IRANSans";
+}
+
+.input-phone::placeholder {
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  color: #d4d4d4;
+}
+
+.input-phone:focus {
+  border-color: #fa5800;
+  background-color: #ffffff;
+}
+
+.submit-btn {
+  cursor: not-allowed;
+  border-color: #d9d9d9;
+  color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.04);
+  box-shadow: none;
+  font-size: 16px;
+  height: 48px;
+  padding: 6px 15px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 11rem;
+  outline: none;
+  border-width: 1px;
+  font-family: "IRANSans";
+}
+
+.wrapper-login-password {
+  padding: 20px 50px;
+}
+
+.login-password {
+  padding: 20px 0;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.wrap-icon {
+  margin-left: auto;
+}
+
+.wrap-icon__img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-password__title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 2rem;
+}
+
+.login-password__description {
+  color: #737373;
+  font-size: 14px;
+}
+
+.otp-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.otp-input {
+  border: 2px solid rgb(219, 219, 219);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: inherit;
+  outline: 0px;
+  width: 3rem;
+  height: 3rem;
+}
+
+.resend-link,
+.resend-link__link {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.resend-link__link {
+  color: #008400;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.submit-btn__otp {
+  margin-top: 2.5rem;
+}

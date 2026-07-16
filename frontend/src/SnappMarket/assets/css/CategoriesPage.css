@@ -1,0 +1,126 @@
+@import "variable.css";
+@import "font.css";
+@import "helpers.css";
+@import "header.css";
+@import "deafult.css";
+@import "footer.css";
+@import "product-box.css";
+
+/* start header styles  */
+.parent-header {
+  border: 0;
+}
+.header-search {
+  max-width: 900px;
+}
+.header-search__input {
+  border-radius: 10px;
+}
+/* finish header styles */
+
+/* start categorybox styles */
+
+.category-slider {
+  margin-top: 5rem;
+  border-top: 0.5px solid #e6e6e6;
+}
+.category-slider__body {
+  width: 100%;
+}
+.ategory-slider__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.category-slider__arrow {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-white);
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary);
+  border-radius: 50%;
+  transition: all 450ms ease;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+  padding: 0 0.5rem;
+}
+.category-slider__arrow-icon {
+  width: 20px;
+  height: 20px;
+}
+.category-slider__arrow--next-icon {
+  position: absolute;
+  top: 3px;
+  right: 7px;
+}
+.category-slider__arrow--prev-icon {
+  position: absolute;
+  top: 2px;
+  right: 7px;
+}
+/* finish categorybox styles */
+
+/* start category-filter styles  */
+
+.category-filter {
+  margin-top: 2rem;
+}
+.category-filter__container {
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.category-slider__wapper-item {
+width: fit-content !important;
+}
+.category-filter__item {
+  border: 1px solid #d9d9d9;
+  transition: box-shadow 0.5s ease-in-out;
+  border-radius: 30px;
+  padding: 3px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.category-filter__item:hover,
+.filter-bar__item--active {
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary);
+}
+
+/* finish category-filter styles  */
+
+.product-card {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+.product-card__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.product-card__item {
+  min-height: 274px;
+  max-height: 274px;
+  height: 274px;
+  display: flex;
+  padding: 0rem;
+  align-items: center;
+  justify-content: center;
+}
+.product-card__image {
+  width: 160px;
+  height: 160px;
+}
+/* start footer  */
+.footer-wrapper {
+  margin-top: 5rem;
+}
+/* finish footer  */

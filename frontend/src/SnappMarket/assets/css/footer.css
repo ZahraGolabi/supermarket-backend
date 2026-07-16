@@ -1,0 +1,48 @@
+.footer-inner {
+  padding-top: 2rem;
+  flex-wrap: wrap;
+}
+.brand-top {
+  gap: 19px;
+  flex-wrap: wrap;
+}
+.brand-logo-icon {
+  width: 180px;
+  height: 74px;
+}
+.brand-text-group {
+  align-self: stretch;
+  flex-direction: column;
+}
+.brand-name {
+  font-size: 20px;
+  margin: 8px 0;
+  color: var(--color-orange);
+  font-weight: 800;
+}
+.expers-name {
+  color: var(--clr-natural2);
+  font-weight: 500;
+  font-size: 16px;
+}
+.brand-copyright {
+  color: var(--clr-natural3);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 3rem 0 2rem 0;
+}
+.footer-links-section {
+  align-self: stretch;
+  flex-direction: column;
+  padding: 0 8rem;
+}
+.footer-link-list {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 5px;
+}
+.footer-link {
+  color: var(--clr-natural3);
+}
