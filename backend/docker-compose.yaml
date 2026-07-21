@@ -3,32 +3,34 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8
-    container_name: snapp-market-mysql
+    container_name: snapp-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      # MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: 1234
+
     ports:
       - '3306:3306'
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
     networks:
-      - snapp-market
+      - snapp-network
 
   redis:
     image: redis:latest
-    container_name: snapp-market-redis
+    container_name: snapp-redis
     restart: always
     ports:
       - '6379:6379'
     networks:
-      - snapp-market
+      - snapp-network
 
 networks:
-  snapp-market:
+  snapp-network:
     driver: bridge
 
 volumes:
   mysql_data:
+  redis_data:
