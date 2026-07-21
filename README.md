@@ -8,9 +8,9 @@
 
 | Layer | Status |
 |-------|--------|
-| 🎨 UI/UX | ✅ **Completed** — Fully responsive, pixel-perfect, RTL |
-| ⚡ JavaScript | 🔥 **Active development** — Making the UI interactive |
-| 🗄️ Backend | 📋 On the horizon |
+| 🎨 UI/UX |  **Completed** — Fully responsive, pixel-perfect, RTL |
+| ⚡ JavaScript |  **Active development** — Making the UI interactive |
+| 🗄️ Backend |  On the horizon |
 
 ---
 
@@ -23,7 +23,7 @@ Built over 6 months of learning, failing, and figuring things out.
 
 ---
 
-## ✨ What's Already Done
+##  What's Already Done
 
 - Full homepage with product grid and categories  
 - Shopping cart and product detail pages  
@@ -33,7 +33,7 @@ Built over 6 months of learning, failing, and figuring things out.
 
 ---
 
-## ⚡ What I'm Coding Right Now
+##  What I'm Coding Right Now
 
 JavaScript is the current focus. Daily progress.
 
