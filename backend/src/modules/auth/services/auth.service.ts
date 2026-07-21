@@ -16,7 +16,6 @@ import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ApplicationRoles } from '@shared/enums';
 import { CacheService } from '@shared/providers';
-import { Compare } from '@shared/utils';
 import { Repository } from 'typeorm';
 import { RegisterByPhoneDto } from '../dto/register-by-phone.dto';
 import { VerifyByPhoneDto } from '../dto/verify-by-phone.dto';
@@ -105,8 +104,8 @@ export class AuthService {
     const otp = await this.cacheService.get(`phone:${dto.phone}`);
 
     if (!otp) throw new NotFoundException('Otp not found');
-    if (!(await Compare(otp, dto.otp)))
-      throw new HttpException('wrong-otp', 400);
+
+    if (otp !== dto.otp) throw new HttpException('wrong-otp', 400);
 
     await this.cacheService.del(`phone:${dto.phone}`);
 
