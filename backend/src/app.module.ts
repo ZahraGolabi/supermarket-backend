@@ -1,9 +1,26 @@
 import { TypeOrmConfig } from '@config/typeorm.config';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppCacheModule, RedisModule } from '@shared/modules';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({ useClass: TypeOrmConfig })],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfig }),
+    EventEmitterModule.forRoot({
+      global: true,
+      ignoreErrors: false,
+      verboseMemoryLeak: true,
+      newListener: true,
+      removeListener: true,
+    }),
+    ScheduleModule.forRoot({}),
+    RedisModule.forRootAsync(),
+    AppCacheModule,
+  ],
   controllers: [],
   providers: [],
 })
