@@ -12,7 +12,7 @@ import { RegisterByPhoneDto } from '../dto/register-by-phone.dto';
 import { VerifyByPhoneDto } from '../dto/verify-by-phone.dto';
 import { AuthService } from '../services/auth.service';
 
-@Controller('users')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 

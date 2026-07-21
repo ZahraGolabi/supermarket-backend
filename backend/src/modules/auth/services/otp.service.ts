@@ -14,7 +14,7 @@ export class OtpService {
   async sendOtpToPhone(phone: string) {
     const otp = this.generateOtp();
 
-    await this.cacheService.set(`phone:${phone}`, await Hash(otp), 120);
+    await this.cacheService.set(`phone:${phone}`, otp, 120);
 
     if (this.configService.get<string>('NODE_ENV') === 'production') {
       //   await this.smsService.sendOtpToPhone({ code: otp, reciver: phone });
