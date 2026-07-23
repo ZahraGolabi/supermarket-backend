@@ -45,6 +45,6 @@ JavaScript is the current focus. Daily progress.
 
 ## 🛠️ Built With
 
-**HTML · CSS · Vanilla JavaScript · Font Awesome**
+**HTML · CSS · Vanilla JavaScript
 
 ---
