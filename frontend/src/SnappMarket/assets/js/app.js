@@ -4,7 +4,6 @@ const stopSection = document.querySelector('.back-to-top');
 const detailProductClose=document.querySelector(".detail-product__close");
 const overlay=document.querySelector(".overlay");
 const detailProduct=document.querySelector(".detail-product");
-const overlay=document.querySelector(".overlay");
 
 
 window.addEventListener('scroll', function() {
