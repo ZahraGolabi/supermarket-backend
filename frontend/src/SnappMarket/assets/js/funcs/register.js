@@ -11,8 +11,6 @@ phoneInput.addEventListener("input", () => {
     : registerBtn.classList.remove("valid");
 });
 
-
-
 registerBtn.addEventListener("click", (event) => {
   event.preventDefault();
   register();
