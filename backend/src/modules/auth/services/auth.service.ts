@@ -12,7 +12,13 @@
 // import { JwtAppService } from './jwt.service';
 // import { OtpService } from './otp.service';
 
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  HttpException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ApplicationRoles } from '@shared/enums';
 import { CacheService } from '@shared/providers';
@@ -118,5 +124,32 @@ export class AuthService {
     await this.userRepo.save(user);
 
     return tokens;
+  }
+
+  async refreshToken(token: string) {
+    try {
+      const payload = await this.jwtService.verifyRefreshToken(token);
+
+      const user = await this.userRepo.findOne({
+        where: { id: payload.sub, refreshToken: token },
+        select: {
+          role: true,
+          refreshToken: true,
+        },
+      });
+
+      if (!user) throw new ForbiddenException('refresh-token is not yours');
+
+      const accessToken: string = await this.jwtService.generateAccessToken({
+        sub: payload.sub,
+        role: payload.role,
+      });
+
+      return {
+        accessToken,
+      };
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
+    }
   }
 }

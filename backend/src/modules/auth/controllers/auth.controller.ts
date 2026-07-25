@@ -1,4 +1,11 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { ApiOkResponse } from '@nestjs/swagger';
 import {
   accessTokenName,
   appCookieOptions,
@@ -6,6 +13,7 @@ import {
   MaxAge_RefreshToken,
   refreshTokenName,
 } from '@shared/constants';
+import { Cookie } from '@shared/decorators';
 import { PublicEndPoint } from '@shared/decorators/skip-auth.decorator';
 import { setCookies } from '@shared/utils';
 import { type Response } from 'express';
@@ -47,5 +55,33 @@ export class AuthController {
     console.log(accessToken, refreshToken);
 
     return response.status(200).json({ success: true });
+  }
+
+  @Post('refresh-token')
+  @PublicEndPoint()
+  @ApiOkResponse({ type: Boolean })
+  async refreshToken(
+    @Cookie(refreshTokenName) refreshToken: string,
+    @Res() response: Response,
+  ) {
+    if (!refreshToken)
+      throw new UnauthorizedException('refresh-token not found');
+
+    const { accessToken } = await this.service.refreshToken(refreshToken);
+
+    setCookies(response, [
+      {
+        name: accessTokenName,
+        value: accessToken,
+        options: {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'lax',
+          maxAge: MaxAge_RefreshToken,
+        },
+      },
+    ]);
+
+    response.json({ success: true });
   }
 }
