@@ -6,6 +6,7 @@ import {
   MaxAge_RefreshToken,
   refreshTokenName,
 } from '@shared/constants';
+import { PublicEndPoint } from '@shared/decorators/skip-auth.decorator';
 import { setCookies } from '@shared/utils';
 import { type Response } from 'express';
 import { RegisterByPhoneDto } from '../dto/register-by-phone.dto';
@@ -16,11 +17,13 @@ import { AuthService } from '../services/auth.service';
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
+  @PublicEndPoint()
   @Post('register-by-phone')
   async registerByPhone(@Body() dto: RegisterByPhoneDto) {
     return await this.service.registerByPhone(dto);
   }
 
+  @PublicEndPoint()
   @Post('verify-by-phone')
   async verifyByPhone(
     @Body() dto: VerifyByPhoneDto,
