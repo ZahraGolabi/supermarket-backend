@@ -3,4 +3,5 @@ export enum ApplicationRoles {
   ADMIN = 'admin',
   USER = 'user',
   SELLER = 'seller',
+  ALL = 'all',
 }
