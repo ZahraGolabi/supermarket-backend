@@ -1,5 +1,5 @@
 @font-face {
   font-family: "IRANSans";
-  src: url("/assets/Fonts/IRANSans-Bold-web.ttf") format("ttf");
-  src: url("/assets/Fonts/IRANSans-Light-web.eot") format("eot");
+  src: url("assets/Fonts/IRANSans-Bold-web.ttf") format("ttf");
+  src: url("assets/Fonts/IRANSans-Light-web.eot") format("eot");
 }
