@@ -4,8 +4,14 @@
 
 body {
   margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   min-height: 100vh;
   font-family: "IRANSans";
@@ -22,9 +28,18 @@ body {
   background: #fff;
 }
 .login {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 20px;
 }
@@ -39,15 +54,28 @@ body {
   width: 100%;
   max-width: 460px;
   height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
 .login-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -70,9 +98,38 @@ body {
   border-width: 1px;
   border-style: solid;
   border-color: #d9d9d9;
+  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   outline: none;
   font-family: "IRANSans";
+}
+
+.input-phone::-webkit-input-placeholder {
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  color: #d4d4d4;
+}
+
+.input-phone::-moz-placeholder {
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  color: #d4d4d4;
+}
+
+.input-phone:-ms-input-placeholder {
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  color: #d4d4d4;
+}
+
+.input-phone::-ms-input-placeholder {
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  color: #d4d4d4;
 }
 
 .input-phone::placeholder {
@@ -92,6 +149,7 @@ body {
   border-color: #d9d9d9;
   color: rgba(0, 0, 0, 0.25);
   background-color: rgba(0, 0, 0, 0.04);
+  -webkit-box-shadow: none;
   box-shadow: none;
   font-size: 16px;
   height: 48px;
@@ -116,6 +174,8 @@ body {
 
 .login-password {
   padding: 20px 0;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
   gap: 5px;
 }
@@ -142,12 +202,21 @@ body {
 }
 
 .otp-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 10px;
   margin-top: 2rem;
   direction: rtl;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
 
@@ -166,8 +235,12 @@ body {
 .otp-input:focus {
   border-color: #fa5800;
   background-color: #fff5f0;
+  -webkit-box-shadow: 0 0 0 4px rgba(250, 88, 0, 0.15);
   box-shadow: 0 0 0 4px rgba(250, 88, 0, 0.15);
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
   transform: scale(1.05);
+  -webkit-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
 }

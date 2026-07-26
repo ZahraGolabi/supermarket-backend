@@ -6,15 +6,32 @@
   .super-app-bottom-wrapper {
     margin: 0;
   }
-
+  .slider-banner,
+  .super-app-wrapper {
+    padding: 0 16px;
+  }
   .hero-title {
     font-size: 1.5rem;
+  }
+  .registration-article-img {
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .registration-article {
+    width: 27rem;
   }
 }
 
 @media only screen and (max-width: 992px) {
   .main-nav {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
     padding: 0.5rem 0;
   }
@@ -24,7 +41,11 @@
   }
 
   .nav-link {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
   }
 
@@ -47,13 +68,23 @@
   }
 
   .hero-content {
+    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
   }
 
   .hero-content-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 
@@ -71,23 +102,34 @@
 
   .super-app-banner,
   .super-app-content {
-    flex-basis: 80%;
+    -ms-flex-preferred-size: 95%;
+    flex-basis: 95%;
     margin: 0 auto;
   }
-  .swiper-slide{
-  display: flex;
+  .swiper-slide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .hero-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 
   .hero-content,
   .hero-media {
+    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
   }
 
@@ -103,6 +145,8 @@
   }
 
   .hero-content-inner {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
   }
 
@@ -136,6 +180,8 @@
 }
 @media only screen and (max-width: 480px) {
   .hero-footer-note {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     padding: 0 1rem;
   }
@@ -170,15 +216,16 @@
   .app-download-badges {
     padding: 0;
   }
-  
+
   .footer-link {
     width: 100%;
   }
-  .hero-banner__wrapper{
-  
-aspect-ratio:12/4;
+
+  .hero-banner__wrapper {
+    aspect-ratio: 12/4;
   }
+  
   .slider-dots {
-bottom: 5px;
+    bottom: 5px;
   }
 }
