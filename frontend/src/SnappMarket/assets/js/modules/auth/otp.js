@@ -1,5 +1,5 @@
 import { handleOtpVerification } from "./auth.js";
-import { getToken } from "./utils.js";
+import { getToken } from "../utils/utils.js";
 
 window.addEventListener("load", () => {
   setupOtpAutoFocus();
