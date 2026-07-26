@@ -1,34 +1,63 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import {
+  AuthorizeByRole,
+  PaginationOptions,
+  PublicEndPoint,
+} from '@shared/decorators';
+import { Url } from '@shared/decorators/url.decorator';
+import { ApplicationRoles } from '@shared/enums';
+import { Paginate, type PaginateQuery } from 'nestjs-paginate';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(private readonly service: CategoryService) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.create(createCategoryDto);
+  @AuthorizeByRole([ApplicationRoles.OWNER, ApplicationRoles.ADMIN])
+  async create(@Body() dto: CreateCategoryDto) {
+    return this.service.create(dto);
   }
 
   @Get()
-  findAll() {
-    return this.categoryService.findAll();
+  @PublicEndPoint()
+  @PaginationOptions({
+    filterOptions: [{ field: 'title', example: '$ilike:title' }],
+    sortOptions: [{ example: 'createdAt:DESC' }],
+  })
+  async findAll(@Paginate() query: PaginateQuery, @Url() url: string) {
+    return this.service.findAll(query, url);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.categoryService.findOne(+id);
+  @PublicEndPoint()
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.service.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
+  @Put(':id')
+  @AuthorizeByRole([ApplicationRoles.OWNER, ApplicationRoles.ADMIN])
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateCategoryDto,
+  ) {
+    return this.service.update(id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  @AuthorizeByRole([ApplicationRoles.OWNER, ApplicationRoles.ADMIN])
+  async remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.service.remove(id);
   }
 }
