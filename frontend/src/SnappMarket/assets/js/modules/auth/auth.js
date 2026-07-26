@@ -1,11 +1,11 @@
-import { validations } from "./validation.js";
+import { validations } from "../utils/validation.js";
 import {
   showSwal,
   saveToLocalStorage,
   getFromLocalstorage,
   getToken,
-} from "./utils.js";
-
+} from "../utils/utils.js";
+import { baseURL } from "../../config.js";
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
   if (!validations(phoneInput.value)) {
@@ -16,9 +16,8 @@ const register = async () => {
     phone: phoneInput.value,
   };
 
-  const baseUrl = "http://localhost:3000/api/auth/register-by-phone";
   try {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(`${baseURL}/auth/register-by-phone`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,8 +43,7 @@ const handleOtpVerification = async (otpCode) => {
     otp: otpCode,
   };
 
-  const baseUrl = "http://localhost:3000/api/auth/verify-by-phone";
-  const response = await fetch(baseUrl, {
+  const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

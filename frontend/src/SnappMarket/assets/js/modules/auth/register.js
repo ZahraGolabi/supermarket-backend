@@ -1,5 +1,5 @@
 import { register } from "./auth.js";
-import { validations } from "./validation.js";
+import { validations } from "../utils/validation.js";
 
 const registerBtn = document.querySelector("#submit-btn");
 const phoneInput = document.querySelector("#phone");

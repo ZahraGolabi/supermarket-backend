@@ -1,5 +1,5 @@
 .footer-inner {
-  padding-top: 2rem;
+  padding: 2rem 10px 10px 10px;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
@@ -30,7 +30,7 @@
 .expers-name {
   color: var(--clr-natural2);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 20px;
 }
 .brand-copyright {
   color: var(--clr-natural3);
