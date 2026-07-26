@@ -5,16 +5,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheService } from '@shared/providers';
 import { OwnerSeeder } from 'src/seeders/owner.seeder';
 import { AuthController } from './controllers/auth.controller';
+import { UserController } from './controllers/user.controller';
 import { User } from './entities/user.entity';
 import { AuthService } from './services/auth.service';
 import { JwtAppService } from './services/jwt.service';
 import { OtpService } from './services/otp.service';
+import { UserService } from './services/user.service';
 
 @Global()
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
-  controllers: [AuthController],
-  providers: [AuthService, JwtService, JwtAppService, CacheService, OtpService],
+  controllers: [AuthController, UserController],
+  providers: [
+    AuthService,
+    JwtService,
+    JwtAppService,
+    CacheService,
+    OtpService,
+    UserService,
+  ],
   exports: [JwtAppService, CacheService],
 })
 export class AuthModule implements OnApplicationBootstrap {
