@@ -1,3 +1,5 @@
+
+
 @import "variable.css";
 @import "font.css";
 @import "helpers.css";
@@ -9,7 +11,10 @@
 .banner-product__info {
   min-height: 182px;
   position: relative;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .banner-product__discount {
@@ -38,7 +43,8 @@
 .category-slider__image,
 .shop-card__image,
 .category-slider__media {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
 }
 .banner-product__image,
@@ -65,7 +71,8 @@
   height: 36px;
   background-color: var(--clr-white);
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
 }
 .banner-product__add-btn svg {
   width: 20px;
@@ -95,16 +102,23 @@
   overflow: hidden;
 }
 .product-slider .swiper-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-transition: none;
   transition: none;
   gap: 0.5rem;
   /* justify-content: space-evenly; */
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 .product-slider .swiper-slide {
   width: auto;
   margin: 0 5px;
-  transform: none;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
   opacity: 1;
 }
 .product-slider .swiper-slide:first-child {
@@ -127,11 +141,18 @@
   background-color: var(--color-neutral-container);
 }
 .category-slider__item {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   min-width: 120px;
   max-height: 12rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 12px;
   padding: 0;
 }
@@ -159,7 +180,7 @@
 }
 
 
-/*   <!-- start Section 9: Fresher than Fresh  --> */
+/*   \3c !-- start Section 9: Fresher than Fresh  --> */
 
 .register-section-body {
   padding: 1rem;
@@ -176,6 +197,8 @@
   height: 20px;
 }
 .register-section-product {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
 }
 .banner-product__title-product {
@@ -196,4 +219,4 @@
   line-height: 1.6;
 }
 
-/*   <!-- finish Section 9: Fresher than Fresh  --> */
+/*   \3c !-- finish Section 9: Fresher than Fresh  --> */

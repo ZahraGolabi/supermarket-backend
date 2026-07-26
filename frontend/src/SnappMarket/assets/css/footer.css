@@ -1,9 +1,11 @@
 .footer-inner {
   padding-top: 2rem;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .brand-top {
   gap: 19px;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .brand-logo-icon {
@@ -11,7 +13,12 @@
   height: 74px;
 }
 .brand-text-group {
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
   align-self: stretch;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 .brand-name {
@@ -33,7 +40,12 @@
   padding: 3rem 0 2rem 0;
 }
 .footer-links-section {
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
   align-self: stretch;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   padding: 0 8rem;
 }
