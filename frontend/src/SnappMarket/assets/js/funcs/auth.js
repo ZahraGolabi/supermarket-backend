@@ -5,6 +5,7 @@ import {
   getFromLocalstorage,
   getToken,
 } from "./utils.js";
+import { baseURL } from "./config.js"
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -16,9 +17,11 @@ const register = async () => {
     phone: phoneInput.value,
   };
 
-  const baseUrl = "http://localhost:3000/api/auth/register-by-phone";
   try {
-    const response = await fetch(baseUrl, {
+        console.log("Sending request to:", `${baseURL}/auth/register-by-phone`);
+    console.log("Request data:", newUserInfos);
+
+    const response = await fetch(`${baseURL}/auth/register-by-phone`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,8 +47,7 @@ const handleOtpVerification = async (otpCode) => {
     otp: otpCode,
   };
 
-  const baseUrl = "http://localhost:3000/api/auth/verify-by-phone";
-  const response = await fetch(baseUrl, {
+  const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
