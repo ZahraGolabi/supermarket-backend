@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   AppCacheModule,
   AuthorizationModule,
+  InterceptorsModule,
   RedisModule,
 } from '@shared/modules';
 
@@ -26,6 +27,7 @@ import {
     RedisModule.forRootAsync(),
     AppCacheModule,
     AuthorizationModule,
+    InterceptorsModule,
     AuthModule,
   ],
   controllers: [],
