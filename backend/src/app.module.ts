@@ -1,5 +1,6 @@
 import { TypeOrmConfig } from '@config/typeorm.config';
 import { AuthModule } from '@core/auth/auth.module';
+import { CategoryModule } from '@core/category/category.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -29,6 +30,7 @@ import {
     AuthorizationModule,
     InterceptorsModule,
     AuthModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],
