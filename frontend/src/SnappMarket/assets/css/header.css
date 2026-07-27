@@ -1,9 +1,9 @@
-
 .header {
   position: fixed;
   width: 100%;
   z-index: 9;
 }
+
 .parent-header {
   background-color: var(--clr-white);
   gap: 1rem;
@@ -25,8 +25,8 @@
   right: 16px;
   top: 50%;
   -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   background-color: var(--background-color);
   color: var(--clr-gray);
   pointer-events: none;
@@ -39,8 +39,8 @@
   color: var(--clr-gray);
   border: none;
   outline: none;
--webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .header-search__input::-webkit-input-placeholder {
   font-size: inherit;
@@ -88,6 +88,12 @@
 .basket__icon {
   color: var(--clr-black);
 }
+
+.login-wrapper {
+  display: flex;
+  position: relative;
+}
+
 .login {
   padding: 8px 16px;
   color: var(--clr-white);
@@ -97,7 +103,76 @@
   outline: none;
   cursor: pointer;
   white-space: nowrap;
+  margin-right: 3rem;
 }
+
+.login__body {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 320px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  outline: none;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  display: none;
+  visibility: hidden;
+}
+.show-panel{
+  display: block;
+  visibility: visible;
+}
+
+.login__profile-wrapper {
+  color: rgba(0, 0, 0, 0.45);
+  transition: all 0.2s;
+  border-bottom: 1px solid #e7dede;
+  padding-bottom: 5px;
+  margin-top: 0.75rem;
+}
+
+.login__profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 5px 12px;
+}
+
+.login__profile-avatar--wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.login__profile:hover {
+  background-color: #cac7c78e;
+}
+
+.login__profile-avatar-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.login__profile-info {
+  padding-right: 0.5rem;
+}
+.login__profile-name {
+  font-size: 14px;
+  margin: 0;
+  color: var(--clr-black);
+}
+.login__profile-desc {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #737373;
+}
+
 .basket:hover {
   background-color: var(--background-color);
   border-radius: 20%;

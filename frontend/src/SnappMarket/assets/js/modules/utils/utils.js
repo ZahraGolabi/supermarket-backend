@@ -19,7 +19,7 @@ const getToken = () => {
   return userInfos;
 };
 
-const fetchAuth = async (url, option) => {
+const fetchApi = async (url, option) => {
   option.credentials = "include";
   let response = await fetch(url, option);
   if (response.status === 401) {
@@ -42,4 +42,4 @@ const fetchAuth = async (url, option) => {
   return response;
 };
 
-export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken ,fetchAuth };
+export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken ,fetchApi };
