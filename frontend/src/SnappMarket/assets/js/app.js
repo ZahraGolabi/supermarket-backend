@@ -37,10 +37,11 @@ const openDetail=()=> toggleOverlay(true)
 const closeDetail =()=> toggleOverlay(false)
 
 
+console.log("test");
 
-bannerProduct.forEach((item)=>{
-  item.addEventListener("click",openDetail)
-})
+// bannerProduct.forEach((item)=>{
+//   item.addEventListener("click",openDetail)
+// })
 detailProductClose.addEventListener("click",closeDetail)
 
 

@@ -4,8 +4,10 @@ import {
   saveToLocalStorage,
   getFromLocalstorage,
   getToken,
+  fetchAuth,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
+
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
   if (!validations(phoneInput.value)) {
@@ -15,7 +17,7 @@ const register = async () => {
   const newUserInfos = {
     phone: phoneInput.value,
   };
-
+  
   try {
     const response = await fetch(`${baseURL}/auth/register-by-phone`, {
       method: "POST",
@@ -23,12 +25,15 @@ const register = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUserInfos),
+      credentials: "include",
     });
     const data = await response.json();
+    console.log(response);
+
     if (response.ok) {
       await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
-      window.location.href = "passwordLogin.html";
+      location.href = "passwordLogin.html";
     }
     return data;
   } catch (error) {
@@ -49,6 +54,7 @@ const handleOtpVerification = async (otpCode) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userInfo),
+    credentials: "include",
   });
   const data = await response.json();
   if (response.ok) {

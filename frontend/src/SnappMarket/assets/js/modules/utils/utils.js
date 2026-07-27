@@ -19,4 +19,27 @@ const getToken = () => {
   return userInfos;
 };
 
-export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken };
+const fetchAuth = async (url, option) => {
+  option.credentials = "include";
+  let response = await fetch(url, option);
+  if (response.status === 401) {
+    const responseRefresh = await fetch(
+      `http://127.0.0.1:3000/api/auth/refresh-token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      },
+    );
+    if (responseRefresh.ok) {
+      response = await fetch(url, option);
+    } else {
+      location.href = "login.html";
+    }
+  }
+  return response;
+};
+
+export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken ,fetchAuth };
