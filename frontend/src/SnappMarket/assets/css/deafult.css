@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-   overflow-x: hidden;
+  overflow-x: hidden;
 }
 *,
 *::after,
@@ -13,18 +13,17 @@ body {
   direction: rtl;
   font-size: 0.875rem;
   line-height: 1.8;
-   overflow-x: hidden;
+  overflow-x: hidden;
 }
 a {
   text-decoration: none;
 }
 .container {
-  /* max-width: 80rem; */
-    width: 100%;
+  width: 100%;
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
-   /* overflow-x: hidden; */
+  /* overflow-x: hidden; */
 }
 
 .pack-icon {

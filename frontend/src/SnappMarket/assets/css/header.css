@@ -104,6 +104,7 @@
   cursor: pointer;
   white-space: nowrap;
   margin-right: 3rem;
+  transition: var(--transition);
 }
 
 .login__body {
@@ -121,18 +122,20 @@
   padding: 0.75rem;
   display: none;
   visibility: hidden;
+  transition: var(--transition);
 }
-.show-panel{
+.show-panel {
   display: block;
   visibility: visible;
 }
 
 .login__profile-wrapper {
   color: rgba(0, 0, 0, 0.45);
-  transition: all 0.2s;
+  transition: var(--transition);
   border-bottom: 1px solid #e7dede;
   padding-bottom: 5px;
   margin-top: 0.75rem;
+  transition: var(--transition);
 }
 
 .login__profile {
@@ -142,11 +145,15 @@
   justify-content: space-between;
   border-radius: 5px;
   padding: 5px 12px;
+  height: 55px;
+  transition: var(--transition);
+  cursor: pointer;
 }
 
 .login__profile-avatar--wrapper {
   display: flex;
   align-items: center;
+  transition: var(--transition);
 }
 
 .login__profile:hover {
