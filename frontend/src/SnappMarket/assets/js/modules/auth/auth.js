@@ -6,6 +6,7 @@ import {
   getToken,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
+import { baseURL } from "../../config.js";
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -24,14 +25,20 @@ const register = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUserInfos),
-      credentials: "include",
     });
     const data = await response.json();
-
+    if (response.ok) {
+      await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
+      saveToLocalStorage("user", { phone: phoneInput.value });
+      window.location.href = "passwordLogin.html";
+    }
+    const data = await response.json();
     if (response.ok) {
       saveToLocalStorage("user", { phone: phoneInput.value });
       const result = await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
       result.isConfirmed ? (location.href = "passwordLogin.html") : "";
+
+      location.href = "passwordLogin.html";
     }
     return data;
   } catch (error) {

@@ -26,6 +26,8 @@ const getToken = () => {
   return userInfos;
 };
 
+export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken };
+
 const fetchApi = async (url, option) => {
   option.credentials = "include";
   let response = await fetch(url, option);
@@ -50,3 +52,4 @@ const fetchApi = async (url, option) => {
 };
 
 export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken ,fetchApi };
+

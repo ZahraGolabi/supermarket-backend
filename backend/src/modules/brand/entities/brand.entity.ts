@@ -1,6 +1,14 @@
 import { Category } from '@core/category/entities/category.entity';
+import { Good } from '@core/good/entities/good.entity';
 import { BaseApplicationEntity } from '@shared/abstract';
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 @Index(['name', 'categoryId'], { unique: true })
@@ -20,4 +28,7 @@ export class Brand extends BaseApplicationEntity {
   })
   @JoinColumn({ name: 'categoryId' })
   category: Category;
+
+  @OneToMany(() => Good, (good) => good.brand)
+  goods: Good[];
 }
