@@ -1,5 +1,6 @@
+import { Good } from '@core/good/entities/good.entity';
 import { BaseApplicationEntity } from '@shared/abstract';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class Category extends BaseApplicationEntity {
@@ -8,4 +9,7 @@ export class Category extends BaseApplicationEntity {
 
   @Column({ nullable: true })
   description: string;
+
+  @OneToMany(() => Good, (good) => good.category)
+  goods: Good[];
 }
