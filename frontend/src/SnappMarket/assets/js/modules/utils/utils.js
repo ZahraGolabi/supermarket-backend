@@ -4,6 +4,13 @@ const showSwal = (title, text, icon, confirmButtonText) => {
     text,
     icon,
     confirmButtonText,
+     buttonsStyling: false,  
+    customClass: {       
+      popup: 'swal-custom-popup',
+      title: 'swal-custom-title',
+      htmlContainer: 'swal-custom-text',
+      confirmButton: 'swal-custom-button'
+    }
   });
 };
 const saveToLocalStorage = (key, value) => {
@@ -19,9 +26,8 @@ const getToken = () => {
   return userInfos;
 };
 
-<<<<<<< HEAD
 export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken };
-=======
+
 const fetchApi = async (url, option) => {
   option.credentials = "include";
   let response = await fetch(url, option);
@@ -46,4 +52,4 @@ const fetchApi = async (url, option) => {
 };
 
 export { showSwal, saveToLocalStorage, getFromLocalstorage, getToken ,fetchApi };
->>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
+
