@@ -12,6 +12,8 @@ export class User extends BaseApplicationEntity {
   @Index()
   lastName?: string;
 
+  fullName?: string;
+
   @Column({ length: 11, unique: true, nullable: true })
   phone?: string;
 

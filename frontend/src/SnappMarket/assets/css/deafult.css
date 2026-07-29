@@ -1,6 +1,10 @@
 html {
   box-sizing: border-box;
+<<<<<<< HEAD
    overflow-x: hidden;
+=======
+  overflow-x: hidden;
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 }
 *,
 *::after,
@@ -13,18 +17,30 @@ body {
   direction: rtl;
   font-size: 0.875rem;
   line-height: 1.8;
+<<<<<<< HEAD
    overflow-x: hidden;
+=======
+  overflow-x: hidden;
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 }
 a {
   text-decoration: none;
 }
 .container {
+<<<<<<< HEAD
   /* max-width: 80rem; */
     width: 100%;
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;
    overflow-x: hidden;
+=======
+  width: 100%;
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  /* overflow-x: hidden; */
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 }
 
 .pack-icon {

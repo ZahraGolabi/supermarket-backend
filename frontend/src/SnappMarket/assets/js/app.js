@@ -4,6 +4,12 @@ const stopSection = document.querySelector('.back-to-top');
 const detailProductClose=document.querySelector(".detail-product__close");
 const overlay=document.querySelector(".overlay");
 const detailProduct=document.querySelector(".detail-product");
+<<<<<<< HEAD
+=======
+const bannerProduct=document.querySelectorAll(".banner-product__image-wapper");
+const loginBtn=document.querySelector("#login")
+const loginBody=document.querySelector(".login__body")
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 
 
 window.addEventListener('scroll', function() {
@@ -36,11 +42,24 @@ document.body.classList[action]('overlay-open');
 const openDetail=()=> toggleOverlay(true)
 const closeDetail =()=> toggleOverlay(false)
 
+<<<<<<< HEAD
 
+=======
+const loginDrooDownHandler=()=>{
+loginBody.classList.toggle("show-panel")
+}
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 
 bannerProduct.forEach((item)=>{
   item.addEventListener("click",openDetail)
 })
+<<<<<<< HEAD
 detailProductClose.addEventListener("click",closeDetail)
 
+=======
+
+
+detailProductClose.addEventListener("click",closeDetail)
+loginBtn.addEventListener("click",loginDrooDownHandler)
+>>>>>>> 4313ff028c008694081b3239a65d0579afa3ba92
 
