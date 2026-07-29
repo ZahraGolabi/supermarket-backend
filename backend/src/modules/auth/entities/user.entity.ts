@@ -6,7 +6,11 @@ import { Column, Entity, Index } from 'typeorm';
 export class User extends BaseApplicationEntity {
   @Column({ length: 100, nullable: true })
   @Index()
-  fullName?: string;
+  firstName?: string;
+
+  @Column({ length: 100, nullable: true })
+  @Index()
+  lastName?: string;
 
   @Column({ length: 11, unique: true, nullable: true })
   phone?: string;
