@@ -1,15 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { GoodService } from './good.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { AuthorizeByRole } from '@shared/decorators';
+import { ApplicationRoles } from '@shared/enums';
 import { CreateGoodDto } from './dto/create-good.dto';
 import { UpdateGoodDto } from './dto/update-good.dto';
+import { GoodService } from './good.service';
 
 @Controller('good')
 export class GoodController {
   constructor(private readonly goodService: GoodService) {}
 
   @Post()
-  create(@Body() createGoodDto: CreateGoodDto) {
-    return this.goodService.create(createGoodDto);
+  @AuthorizeByRole([ApplicationRoles.ADMIN, ApplicationRoles.OWNER])
+  async create(@Body() createGoodDto: CreateGoodDto) {
+    return await this.goodService.create(createGoodDto);
   }
 
   @Get()

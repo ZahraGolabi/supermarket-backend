@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateGoodDto } from './dto/create-good.dto';
 import { UpdateGoodDto } from './dto/update-good.dto';
+import { Good } from './entities/good.entity';
 
 @Injectable()
 export class GoodService {
-  create(createGoodDto: CreateGoodDto) {
-    return 'This action adds a new good';
+  constructor(
+    @InjectRepository(Good)
+    private readonly repo: Repository<Good>,
+  ) {}
+  async create(dto: CreateGoodDto) {
+    const newGood = this.repo.create(dto);
+    return await this.repo.save(newGood);
   }
 
-  findAll() {
-    return `This action returns all good`;
+  async findAll() {
+    return `not implemented`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} good`;
+  async findOne(id: number) {
+    return `not implemented`;
   }
 
-  update(id: number, updateGoodDto: UpdateGoodDto) {
-    return `This action updates a #${id} good`;
+  async update(id: number, updateGoodDto: UpdateGoodDto) {
+    return `not implemented`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} good`;
+  async remove(id: number) {
+    return `not implemented`;
   }
 }
