@@ -39,9 +39,9 @@ document.body.classList[action]('overlay-open');
 const openDetail=()=> toggleOverlay(true)
 const closeDetail =()=> toggleOverlay(false)
 
-const loginDrooDownHandler=()=>{
-loginBody.classList.toggle("show-panel")
-}
+// const loginDrooDownHandler=()=>{
+// loginBody.classList.toggle("show-panel")
+// }
 
 bannerProduct.forEach((item)=>{
   item.addEventListener("click",openDetail)
@@ -49,5 +49,5 @@ bannerProduct.forEach((item)=>{
 
 
 detailProductClose.addEventListener("click",closeDetail)
-loginBtn.addEventListener("click",loginDrooDownHandler)
+// loginBtn.addEventListener("click",loginDrooDownHandler)
 

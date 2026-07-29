@@ -4,7 +4,6 @@ import {
   saveToLocalStorage,
   getFromLocalstorage,
   getToken,
-  fetchAuth,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
 
@@ -17,7 +16,7 @@ const register = async () => {
   const newUserInfos = {
     phone: phoneInput.value,
   };
-  
+
   try {
     const response = await fetch(`${baseURL}/auth/register-by-phone`, {
       method: "POST",
@@ -28,12 +27,11 @@ const register = async () => {
       credentials: "include",
     });
     const data = await response.json();
-    console.log(response);
 
     if (response.ok) {
-      await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
-      location.href = "passwordLogin.html";
+      const result = await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
+      result.isConfirmed ? (location.href = "passwordLogin.html") : "";
     }
     return data;
   } catch (error) {
@@ -47,7 +45,6 @@ const handleOtpVerification = async (otpCode) => {
     phone: userPhone.phone,
     otp: otpCode,
   };
-
   const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
     method: "POST",
     headers: {
@@ -58,13 +55,13 @@ const handleOtpVerification = async (otpCode) => {
   });
   const data = await response.json();
   if (response.ok) {
-    await showSwal(
+    const result = await showSwal(
       "موفقیت",
       "ورود شما با موفقیت انجام شد",
       "success",
       "ورود به پنل",
     );
-    window.location.href = "index.html";
+  location.href = "index.html";
   } else {
     await showSwal(
       "خطا",

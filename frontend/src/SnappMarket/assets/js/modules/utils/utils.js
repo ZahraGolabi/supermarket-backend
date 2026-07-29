@@ -4,6 +4,13 @@ const showSwal = (title, text, icon, confirmButtonText) => {
     text,
     icon,
     confirmButtonText,
+     buttonsStyling: false,  
+    customClass: {       
+      popup: 'swal-custom-popup',
+      title: 'swal-custom-title',
+      htmlContainer: 'swal-custom-text',
+      confirmButton: 'swal-custom-button'
+    }
   });
 };
 const saveToLocalStorage = (key, value) => {
