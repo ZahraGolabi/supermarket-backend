@@ -52,4 +52,4 @@ detailProductClose.addEventListener("click", closeDetail);
 
 detailProductClose.addEventListener("click", closeDetail);
 // loginBtn.addEventListener("click",loginDrooDownHandler)
-loginBtn.addEventListener("click", loginDrooDownHandler);
+
