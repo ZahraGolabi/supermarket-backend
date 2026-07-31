@@ -26,9 +26,12 @@ const getLocalstorage = () => {
   return userInfos;
 };
 
-const fetchApi = async (url, option) => {
-  option.credentials = "include";
-  let response = await fetch(url, option);
+const fetchApi = async (url, option={}) => {
+   const finalOption = {
+    ...option,
+    credentials: "include"
+  };
+  let response = await fetch(url, finalOption);
   if (response.status === 401) {
     const responseRefresh = await fetch(
       `http://127.0.0.1:3000/api/auth/refresh-token`,
@@ -41,13 +44,15 @@ const fetchApi = async (url, option) => {
       },
     );
     if (responseRefresh.ok) {
-      response = await fetch(url, option);
+      response = await fetch(url, finalOption);
     } else {
       location.href = "login.html";
     }
   }
   return response;
 };
+
+
 
 export {
   showSwal,

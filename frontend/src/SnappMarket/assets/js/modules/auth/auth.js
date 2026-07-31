@@ -4,9 +4,9 @@ import {
   saveToLocalStorage,
   getFromLocalstorage,
   getLocalstorage,
+  fetchApi,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
-console.log("hi");
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -39,7 +39,7 @@ const register = async () => {
 };
 
 const handleOtpVerification = async (otpCode) => {
-  const userPhone =getLocalstorage();
+  const userPhone = getLocalstorage();
   const userInfo = {
     phone: userPhone.phone,
     otp: otpCode,
@@ -58,9 +58,9 @@ const handleOtpVerification = async (otpCode) => {
       "موفقیت",
       "ورود شما با موفقیت انجام شد",
       "success",
-      "ورود به پنل",
+      "ورود و تکمیل اطلاعات",
     );
-  location.href = "index.html";
+    location.href = "register.html";
   } else {
     await showSwal(
       "خطا",
@@ -72,10 +72,36 @@ const handleOtpVerification = async (otpCode) => {
   return data;
 };
 
-const getMe=()=>{
-const token=getLocalstorage()
-console.log(token);
+const getInformationsUser = async () => {
+  const firstNameInput = document.querySelector("#firstName");
+  const lastNameInput = document.querySelector("#lastName");
 
-}
-getMe()
-export { register, handleOtpVerification };
+  const newUserInfos = {
+    firstName: firstNameInput.value.trim(),
+    lastName: lastNameInput.value.trim(),
+    birthDate: "2025-11-02",
+    gender: "man",
+  };
+
+  const response = await fetchApi(`${baseURL}/users/update-profile`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(newUserInfos),
+  });
+
+  const data = await response.json();
+  console.log(response);
+  console.log(data);
+};
+
+const getMe = () => {
+  const token = getLocalstorage();
+  console.log(token);
+};
+
+
+
+export { register, handleOtpVerification, getInformationsUser };

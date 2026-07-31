@@ -1,5 +1,5 @@
 import { handleOtpVerification } from "./auth.js";
-import { getToken } from "../utils/utils.js";
+import { getLocalstorage } from "../utils/utils.js";
 
 window.addEventListener("load", () => {
   setupOtpAutoFocus();
@@ -12,7 +12,7 @@ const isValidation = (key) => {
 const setupOtpAutoFocus = () => {
   const inputs = document.querySelectorAll(".otp-input");
   const loginNumber = document.querySelector(".login-password__phone-number");
-  loginNumber.innerHTML = getToken().phone;
+  loginNumber.innerHTML = getLocalstorage().phone;
   inputs.forEach((input, index) => {
     input.addEventListener("keyup", (event) => {
       const { target } = event;

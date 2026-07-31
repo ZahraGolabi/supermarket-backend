@@ -15,3 +15,4 @@ registerBtn.addEventListener("click", (event) => {
   event.preventDefault();
   register();
 });
+
