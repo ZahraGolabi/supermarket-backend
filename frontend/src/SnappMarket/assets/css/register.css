@@ -1,0 +1,94 @@
+@import "variable.css";
+@import "font.css";
+@import "helpers.css";
+@import "header.css";
+@import "deafult.css";
+@import "footer.css";
+@import "product-box.css";
+
+body {
+  display: flex;
+  justify-content: center;  
+  align-items: center;       
+  min-height: 100vh;         
+}
+
+.user-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 412px;
+  border-radius: 16px;
+  border: 1px solid #d4d4d4;
+  padding: 0 13px;
+}
+
+.user-form__title {
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  align-self: flex-start;
+}
+
+.user-form {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-form__field {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-form__input {
+  padding: 7px 11px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 8px;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  display: block;
+  width: 85%;
+  transition: all 0.2s;
+}
+
+.user-form__input::placeholder {
+  font-family: "IRANSans", Tahoma, sans-serif;
+  font-size: 14px;
+  color: #a0a0a0;
+  font-weight: 300;
+  opacity: 0.8;
+}
+.user-form__input:hover{
+    border-color: var(--color-orange);
+}
+.user-form__input:focus{
+    outline: none;
+    border-color: var(--color-orange);
+}
+.user-form__submit-btn {
+  font-size: 16px;
+  height: 40px;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: not-allowed;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.04);
+  margin: 3rem 0 1rem 0;
+  outline: none;
+  width: 86%;
+  border: 1px solid #d4d4d4;
+  font-family: "IRANSans", Tahoma, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.25);
+}
