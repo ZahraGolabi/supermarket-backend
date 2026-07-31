@@ -47,7 +47,7 @@ const fetchApi = async (url, option = {}) => {
     if (responseRefresh.ok) {
       response = await fetch(url, finalOption);
     } else {
-      location.href = "login.html";
+      // location.href = "login.html";
       return null;
     }
   }
