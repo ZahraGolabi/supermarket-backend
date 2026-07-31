@@ -3,10 +3,10 @@ import {
   showSwal,
   saveToLocalStorage,
   getFromLocalstorage,
-  getToken,
+  getLocalstorage,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
-import { baseURL } from "../../config.js";
+console.log("hi");
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -32,14 +32,6 @@ const register = async () => {
       saveToLocalStorage("user", { phone: phoneInput.value });
       window.location.href = "passwordLogin.html";
     }
-    const data = await response.json();
-    if (response.ok) {
-      saveToLocalStorage("user", { phone: phoneInput.value });
-      const result = await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
-      result.isConfirmed ? (location.href = "passwordLogin.html") : "";
-
-      location.href = "passwordLogin.html";
-    }
     return data;
   } catch (error) {
     showSwal("خطا", "مشکل در ارتباط با سرور", "error", "متوجه شدم");
@@ -47,7 +39,7 @@ const register = async () => {
 };
 
 const handleOtpVerification = async (otpCode) => {
-  const userPhone = getToken();
+  const userPhone =getLocalstorage();
   const userInfo = {
     phone: userPhone.phone,
     otp: otpCode,
@@ -80,4 +72,10 @@ const handleOtpVerification = async (otpCode) => {
   return data;
 };
 
+const getMe=()=>{
+const token=getLocalstorage()
+console.log(token);
+
+}
+getMe()
 export { register, handleOtpVerification };
