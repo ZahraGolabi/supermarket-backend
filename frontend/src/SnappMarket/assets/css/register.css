@@ -8,9 +8,9 @@
 
 body {
   display: flex;
-  justify-content: center;  
-  align-items: center;       
-  min-height: 100vh;         
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .user-form-container {
@@ -54,10 +54,10 @@ body {
   background-color: #fff;
   border-width: 1px;
   border-style: solid;
-  border-color: #d9d9d9;
   display: block;
   width: 85%;
   transition: all 0.2s;
+  font-family: "IRANSans";
 }
 
 .user-form__input::placeholder {
@@ -67,12 +67,12 @@ body {
   font-weight: 300;
   opacity: 0.8;
 }
-.user-form__input:hover{
-    border-color: var(--color-orange);
+.user-form__input:hover {
+  border-color: var(--color-orange);
 }
-.user-form__input:focus{
-    outline: none;
-    border-color: var(--color-orange);
+.user-form__input:focus {
+  outline: none;
+  border-color: var(--color-orange);
 }
 .user-form__submit-btn {
   font-size: 16px;
@@ -91,4 +91,11 @@ body {
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.25);
+}
+
+.valid {
+  background-color: #fa5800;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
 }

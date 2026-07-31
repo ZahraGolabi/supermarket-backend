@@ -1,12 +1,20 @@
+import { getInformationsUser ,getMe } from "./auth.js";
+const firstNameInput = document.querySelector("#firstName");
+const lastNameInput = document.querySelector("#lastName");
+const userSubmitBtn = document.querySelector("#user-submit-Btn");
 
-import { getInformationsUser } from "./auth.js";
+window.addEventListener("input", () => {
+  const lastName = lastNameInput.value.trim();
+  const firstName = firstNameInput.value.trim();
 
+  if (lastName && firstName) {
+    userSubmitBtn.classList.add("valid");
+  }
+});
 
-const userSubmitBtn=document.querySelector("#user-submit-Btn")
-userSubmitBtn.addEventListener("click",(event)=>{
-event.preventDefault()
-getInformationsUser().then((result)=>{
-console.log(result);
-
-})
-})
+userSubmitBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  getInformationsUser().then((result) => {
+    getMe()
+  });
+});

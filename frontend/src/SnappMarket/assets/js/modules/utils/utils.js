@@ -26,10 +26,10 @@ const getLocalstorage = () => {
   return userInfos;
 };
 
-const fetchApi = async (url, option={}) => {
-   const finalOption = {
+const fetchApi = async (url, option = {}) => {
+  const finalOption = {
     ...option,
-    credentials: "include"
+    credentials: "include",
   };
   let response = await fetch(url, finalOption);
   if (response.status === 401) {
@@ -43,16 +43,21 @@ const fetchApi = async (url, option={}) => {
         credentials: "include",
       },
     );
+
     if (responseRefresh.ok) {
       response = await fetch(url, finalOption);
     } else {
       location.href = "login.html";
+      return null;
     }
   }
   return response;
 };
 
-
+const isLogin = () => {
+  const userInfos = localStorage.getItem("user");
+  return userInfos ? true : false;
+};
 
 export {
   showSwal,
@@ -60,4 +65,5 @@ export {
   getFromLocalstorage,
   getLocalstorage,
   fetchApi,
+  isLogin
 };

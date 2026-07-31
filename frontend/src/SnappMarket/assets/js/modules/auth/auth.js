@@ -83,25 +83,36 @@ const getInformationsUser = async () => {
     gender: "man",
   };
 
-  const response = await fetchApi(`${baseURL}/users/update-profile`, {
+  const responseRefresh = await fetchApi(`${baseURL}/users/update-profile`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
     body: JSON.stringify(newUserInfos),
   });
 
-  const data = await response.json();
-  console.log(response);
-  console.log(data);
+  const data = await responseRefresh.json();
+  if (responseRefresh.status == 200) {
+    window.location.href = "index.html";
+  }
+  return data;
 };
 
-const getMe = () => {
+const getMe = async () => {
   const token = getLocalstorage();
+  if (!token) {
+    return false;
+  } else {
+    const response = await fetchApi(`${baseURL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
   console.log(token);
 };
 
-
-
-export { register, handleOtpVerification, getInformationsUser };
+export { register, handleOtpVerification, getInformationsUser, getMe };
