@@ -99,10 +99,6 @@ const getInformationsUser = async () => {
 };
 
 const getMe = async () => {
-  const token = getLocalstorage();
-  if (!token) {
-    return false;
-  } else {
     const response = await fetchApi(`${baseURL}/users/me`, {
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +106,6 @@ const getMe = async () => {
     });
     const data = await response.json();
     return data;
-  }
 
   console.log(token);
 };

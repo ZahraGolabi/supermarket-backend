@@ -36,9 +36,6 @@ const toggleOverlay = (status) => {
 const openDetail = () => toggleOverlay(true);
 const closeDetail = () => toggleOverlay(false);
 
-// const loginDrooDownHandler=()=>{
-// loginBody.classList.toggle("show-panel")
-// }
 
 const loginDrooDownHandler = () => {
   loginBody.classList.toggle("show-panel");
@@ -50,6 +47,4 @@ bannerProduct.forEach((item) => {
 
 detailProductClose.addEventListener("click", closeDetail);
 
-detailProductClose.addEventListener("click", closeDetail);
-// loginBtn.addEventListener("click",loginDrooDownHandler)
 
