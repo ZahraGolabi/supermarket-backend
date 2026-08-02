@@ -1,6 +1,7 @@
 import { register } from "./auth.js";
 import { validations } from "../utils/validation.js";
 
+
 const registerBtn = document.querySelector("#submit-btn");
 const phoneInput = document.querySelector("#phone");
 
@@ -11,7 +12,7 @@ phoneInput.addEventListener("input", () => {
     : registerBtn.classList.remove("valid");
 });
 
-registerBtn.addEventListener("click", (event) => {
+registerBtn.addEventListener("click",(event) => {
   event.preventDefault();
   register();
 });

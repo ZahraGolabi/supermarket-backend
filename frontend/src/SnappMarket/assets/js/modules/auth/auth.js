@@ -7,6 +7,8 @@ import {
   fetchApi,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
+// import { showUserNameInNavBar } from "./getcurrentuser.js";
+
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -30,6 +32,8 @@ const register = async () => {
     if (response.ok) {
       await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
+      // showUserNameInNavBar()
+      // console.log(showUserNameInNavBar());
       window.location.href = "passwordLogin.html";
     }
     return data;

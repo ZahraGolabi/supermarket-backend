@@ -45,7 +45,8 @@ bannerProduct.forEach((item) => {
   item.addEventListener("click", openDetail);
 });
 
-detailProductClose.addEventListener("click", closeDetail);
+
+detailProductClose.addEventListener("click", closeDetail); 
 
 
 const setupLoginDropdown = () => {
@@ -59,4 +60,4 @@ const setupLoginDropdown = () => {
   });
 };
 
-export {setupLoginDropdown};
+export { setupLoginDropdown };

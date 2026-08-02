@@ -27,12 +27,18 @@ const getLocalstorage = () => {
 };
 
 const fetchApi = async (url, option = {}) => {
-  const finalOption = {
-    ...option,
-    credentials: "include",
-  };
-  let response = await fetch(url, finalOption);
-  if (response.status === 401) {
+  try {
+    const finalOption = {
+      ...option,
+      credentials: "include",
+    };
+
+    let response = await fetch(url, finalOption);
+
+    if (response.status !== 401) {
+      return response;
+    }
+
     const responseRefresh = await fetch(
       `http://127.0.0.1:3000/api/auth/refresh-token`,
       {
@@ -41,20 +47,21 @@ const fetchApi = async (url, option = {}) => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-      },
+      }
     );
 
-    if (responseRefresh.ok) {
-      response = await fetch(url, finalOption);
-    } else {
-      // location.href = "login.html";
-      return null;
+    if (!responseRefresh.ok) {
+      return response;
     }
+
+    response = await fetch(url, finalOption);
+    return response;
+
+  } catch (error) {
+    console.log("API Error:", error.message);
+    return null;
   }
-  return response;
 };
-
-
 
 export {
   showSwal,
@@ -62,5 +69,4 @@ export {
   getFromLocalstorage,
   getLocalstorage,
   fetchApi,
- 
 };
