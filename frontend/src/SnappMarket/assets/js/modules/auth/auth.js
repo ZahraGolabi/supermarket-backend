@@ -7,8 +7,6 @@ import {
   fetchApi,
 } from "../utils/utils.js";
 import { baseURL } from "../../config.js";
-// import { showUserNameInNavBar } from "./getcurrentuser.js";
-
 
 const register = async () => {
   const phoneInput = document.querySelector("#phone");
@@ -32,8 +30,6 @@ const register = async () => {
     if (response.ok) {
       await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
-      // showUserNameInNavBar()
-      // console.log(showUserNameInNavBar());
       window.location.href = "passwordLogin.html";
     }
     return data;
@@ -62,9 +58,20 @@ const handleOtpVerification = async (otpCode) => {
       "موفقیت",
       "ورود شما با موفقیت انجام شد",
       "success",
-      "ورود و تکمیل اطلاعات",
+      "ورود ",
     );
-    location.href = "register.html";
+    const res = await fetch(`${baseURL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const user = await res.json();
+    if (user.firstName && user.lastName) {
+      location.href = "index.html";
+    } else {
+      location.href = "register.html";
+    }
   } else {
     await showSwal(
       "خطا",
@@ -73,6 +80,9 @@ const handleOtpVerification = async (otpCode) => {
       "تلاش مجدد",
     );
   }
+  console.log(data);
+  console.log(response);
+
   return data;
 };
 
@@ -103,13 +113,13 @@ const getInformationsUser = async () => {
 };
 
 const getMe = async () => {
-    const response = await fetchApi(`${baseURL}/users/me`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    return data;
+  const response = await fetchApi(`${baseURL}/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
 
   console.log(token);
 };
