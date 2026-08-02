@@ -48,3 +48,15 @@ bannerProduct.forEach((item) => {
 detailProductClose.addEventListener("click", closeDetail);
 
 
+const setupLoginDropdown = () => {
+  const loginBtn = document.querySelector("#login");
+  const loginBody = document.querySelector(".login__body");
+
+  if (!loginBtn || !loginBody) return;
+
+  loginBtn.addEventListener("click", () => {
+    loginBody.classList.toggle("show-panel");
+  });
+};
+
+export {setupLoginDropdown};

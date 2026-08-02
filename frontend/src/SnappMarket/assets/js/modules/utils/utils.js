@@ -54,10 +54,7 @@ const fetchApi = async (url, option = {}) => {
   return response;
 };
 
-// const isLogin = () => {
-//   const userInfos = localStorage.getItem("user");
-//   return userInfos ? true : false;
-// };
+
 
 export {
   showSwal,

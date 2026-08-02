@@ -1,5 +1,6 @@
 import { baseURL } from "../../config.js";
 import { fetchApi } from "../utils/utils.js";
+import {setupLoginDropdown} from "../../app.js";
 
 window.addEventListener("load", () => {
   showUserNameInNavBar();
@@ -7,7 +8,7 @@ window.addEventListener("load", () => {
 
 const showUserNameInNavBar = async () => {
   const navBarProfileBox = document.querySelector(".login");
-  const respone = await fetch(`${baseURL}/users/me`, {
+  const respone = await fetchApi(`${baseURL}/users/me`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -28,15 +29,4 @@ const showUserNameInNavBar = async () => {
   }
   console.log(respone);
   console.log(result);
-};
-
-const setupLoginDropdown = () => {
-  const loginBtn = document.querySelector("#login");
-  const loginBody = document.querySelector(".login__body");
-
-  if (!loginBtn || !loginBody) return;
-
-  loginBtn.addEventListener("click", () => {
-    loginBody.classList.toggle("show-panel");
-  });
 };
