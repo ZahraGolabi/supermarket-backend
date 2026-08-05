@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-👉 [https://supermarket-backend-4a8a9u8l6-z20696219-1705s-projects.vercel.app/](https://supermarket-backend-4a8a9u8l6-z20696219-1705s-projects.vercel.app/)
+👉 [https://supermarket-backend-4a8a9u8l6-z20696219-1705s-projects.vercel.app/]([https://supermarket-backend-4a8a9u8l6-z20696219-1705s-projects.vercel.ap](https://supermarket-backend-sigma.vercel.app)/)
 
 
 
