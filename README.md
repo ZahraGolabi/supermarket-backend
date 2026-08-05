@@ -4,6 +4,12 @@
 
 ---
 
+## 🌐 Live Demo
+
+👉 [https://zahragolabi.github.io/supermarket-backend/](https://zahragolabi.github.io/supermarket-backend/)
+
+---
+
 ## 📊 Status
 
 | Layer | Status |
@@ -23,7 +29,7 @@ Built over 6 months of learning, failing, and figuring things out.
 
 ---
 
-##  What's Already Done
+## ✅ What's Already Done
 
 - Full homepage with product grid and categories  
 - Shopping cart and product detail pages  
@@ -33,7 +39,7 @@ Built over 6 months of learning, failing, and figuring things out.
 
 ---
 
-##  What I'm Coding Right Now
+## ⚡ What I'm Coding Right Now
 
 JavaScript is the current focus. Daily progress.
 
@@ -41,10 +47,9 @@ JavaScript is the current focus. Daily progress.
 - Persistent cart with LocalStorage  
 - Live search and product filtering  
 - Dynamic content rendering
+
 ---
 
 ## 🛠️ Built With
 
-**HTML · CSS · Vanilla JavaScript
-
----
+**HTML · CSS · Vanilla JavaScript**
