@@ -56,7 +56,7 @@
   width: -webkit-fit-content !important;
   width: -moz-fit-content !important;
   width: fit-content !important;
-  margin: 0 auto;
+  margin: -10px auto;
   gap: 1px;
   -webkit-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
@@ -125,7 +125,7 @@
   color: var(--clr-white);
 }
 .product-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   white-space: nowrap;
 }
@@ -181,6 +181,7 @@
   display: flex;
   max-width: 100%;
   gap: 8px;
+  padding: 0 10px;
 }
 .pro-shop-badge__inner {
   padding: 12px 0px;
@@ -370,7 +371,7 @@
 .banner-blue {
   background: var(--background-linear-blu);
 }
-/*   \3c !-- start Section 9: Fresher than Fresh  --> */
+/* start Section 9: Fresher than Fresh  --> */
 .register-section,
 .register-section-body {
   background-color: var(--clr-white);
@@ -380,7 +381,9 @@
 .register-section-btn {
   background-color: var(--color-neutral-container);
 }
-/*   \3c !-- finish Section 9: Fresher than Fresh  --> */
+
+/*  finish Section 9: Fresher than Fresh  --> */
+
 .slide-with-bg {
   max-width: 800px;
   max-height: 231px;
@@ -476,6 +479,7 @@
   z-index: 9;
   opacity: 0;
   visibility: hidden;
+  color: var(--clr-black);
 }
 .back-to-top__btn:hover {
   color: var(--color-orange);

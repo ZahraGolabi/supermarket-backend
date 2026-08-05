@@ -22,15 +22,14 @@
   flex-direction: column;
 }
 .brand-name {
-  font-size: 20px;
+  font-family: "IRANSans-Bold";
+  font-size: 18px;
   margin: 8px 0;
   color: var(--color-orange);
-  font-weight: 800;
 }
 .expers-name {
   color: var(--clr-natural2);
-  font-weight: 500;
-  font-size: 20px;
+  padding: 0 1rem;
 }
 .brand-copyright {
   color: var(--clr-natural3);

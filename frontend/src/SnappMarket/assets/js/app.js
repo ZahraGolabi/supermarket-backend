@@ -60,4 +60,31 @@ const setupLoginDropdown = () => {
   });
 };
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginWrapper = document.querySelector('.login-wrapper');
+    const headerLocation = document.querySelector('.header-location');
+        function hideInMobile() {
+        if (window.innerWidth <= 768) {
+            if (loginWrapper) loginWrapper.style.display = 'none';
+            if (headerLocation) headerLocation.style.display = 'none';
+        }
+    }
+        window.addEventListener('scroll', hideInMobile);
+        window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            if (loginWrapper) loginWrapper.style.display = '';
+            if (headerLocation) headerLocation.style.display = '';
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
 export { setupLoginDropdown };

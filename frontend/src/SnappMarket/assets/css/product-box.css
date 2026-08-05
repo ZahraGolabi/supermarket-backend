@@ -79,7 +79,7 @@
 }
 
 .banner-product__price-current {
-  margin: 0px;
+  margin: 0px 0 0 auto;
   -webkit-box-align: center;
   gap: 0.25rem;
   font-weight: 700;
@@ -88,11 +88,11 @@
   padding: 6px 0 6px 0;
 }
 .banner-product__price-old {
-  margin: 0;
+  margin: 0 0 0 auto;
   text-decoration: line-through;
   font-weight: 400;
   color: var(--clr-natural3);
-  font-size: 1rem;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -138,6 +138,7 @@
 }
 .category-slider__title {
   font-size: 1rem;
+  font-weight: bold;
 }
 .category-slider__more-btn {
   background-color: var(--color-neutral-container);
@@ -181,7 +182,7 @@
   font-weight: 600;
 }
 
-/*   \3c !-- start Section 9: Fresher than Fresh  --> */
+/* !-- start Section 9: Fresher than Fresh  --> */
 
 .register-section-body {
   padding: 1rem;
@@ -207,17 +208,20 @@
   padding: 0 3px 0 3px;
 }
 .section-register-title {
-  font-size: 0.75rem;
-  padding-top: 0.5rem;
-  max-width: 130px;
-  width: 100%;
+  font-size: 0.70rem;
+  padding: 0.75rem 0.5rem 0 0;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.6;
+  word-wrap: break-word;
+  word-break: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  line-height: 1.6;
+  height: 40px;
+  max-height: none;
+  white-space: normal;
+  line-height:1.75;
 }
-
 /*   \3c !-- finish Section 9: Fresher than Fresh  --> */
