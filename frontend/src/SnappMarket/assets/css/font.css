@@ -1,23 +1,23 @@
 @font-face {
   font-family: "IRANSans";
   src:
-    url("assets/font/IRANSans-Light-web.woff2") format("woff2"),
-    url("assets/font/IRANSans-Light-web.ttf") format("truetype");
+    url("../font/IRAN\ Sans\ Light.ttf") format("woff2"),
+    url("../font/IRANSans-Light-web.ttf") format("truetype");
   font-style: normal;
 }
 
 @font-face {
   font-family: "IRANSans-Regular";
   src:
-    url("assets/font/IRANSans-Regular-web.woff2") format("woff2"),
-    url("assets/font/IRANSans-Regular-web.ttf") format("truetype");
+    url("../font/IRANSans-Regular-web.woff2") format("woff2"),
+    url("../font/IRANSans-Regular-web.ttf") format("truetype");
   font-style: normal;
 }
 
 @font-face {
   font-family: "IRANSans-Bold";
   src:
-    url("assets/font/IRANSans-Bold-web.woff2") format("woff2"),
-    url("assets/font/IRANSans-Bold-web.ttf") format("truetype");
+    url("../font/IRANSans-Bold-web.woff2") format("woff2"),
+    url("../font/IRANSans-Bold-web.ttf") format("truetype");
   font-style: normal;
 }
