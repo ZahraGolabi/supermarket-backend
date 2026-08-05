@@ -6,9 +6,9 @@
 
 ## 🌐 Live Demo
 
-👉 [https://zahragolabi.github.io/supermarket-backend/](https://zahragolabi.github.io/supermarket-backend/](https://supermarket-backend-4a8a9u8l6-z20696219-1705s-projects.vercel.app/)
+👉 [https://zahragolabi.github.io/supermarket-backend/](https://zahragolabi.github.io/supermarket-backend/)
 
----
+
 
 ## 📊 Status
 
