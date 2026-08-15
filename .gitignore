@@ -1,0 +1,17 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.venv/
+venv/
+staticfiles/
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

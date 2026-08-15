@@ -1,0 +1,184 @@
+
+/* ---------- d-flex (display: flex) ---------- */
+.parent-header,
+.header-search,
+.header-location,
+.basket,
+.banner-product__icon,
+.banner-product__header,
+.banner-product__title,
+.banner-product__more-btn,
+.banner-product__body,
+.banner-product__add-btn,
+.banner-product__price-current,
+.banner-product__price-old,
+.category-slider__header,
+.category-slider__title,
+.category-slider__more-btn,
+.category-slider__body,
+.wapper-shop-card,
+.shop-card__link,
+.shop-card__figure,
+.shop-card__content,
+.shop-card__store,
+.shop-card__meta,
+.shop-card__rating,
+.shop-card__badges,
+.shop-card__badge,
+.btn-shop,
+.back-to-top__link,
+.back-to-top__btn,
+.footer-inner,
+.brand-top,
+.brand-text-group,
+.footer-links-section,
+.banner-product__favorite,
+.register-section-product,
+.banner-product__title-product,
+.swiper-pagination,
+.banner-product--dent .banner-product__header,
+.banner-product--icecream .banner-product__header,
+.banner-product--fresh .banner-product__header,
+.banner-product--quick .banner-product__header,
+.banner-product--dent .banner-product__body,
+.banner-product--icecream .banner-product__body,
+.banner-product--fresh .banner-product__body,
+.banner-product--quick .banner-product__body,
+.brand-text-group,
+.detail-product,
+.detail-product__wrapper,
+.detail-product__badge-wrapper,
+.detail-product__action-btn,
+.detail-product__image-wrapper,
+.detail-product__footer,
+.detail-product__price-current,
+.detail-product__discount-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/* ---------- align-center (align-items: center) ---------- */
+.parent-header,
+.header-search,
+.header-location,
+.basket,
+.banner-product__header,
+.banner-product__title,
+.banner-product__more-btn,
+.banner-product__body,
+.banner-product__add-btn,
+.banner-product__price-current,
+.category-slider__header,
+.category-slider__title,
+.category-slider__more-btn,
+.category-slider__body,
+.shop-card__link,
+.shop-card__store,
+.shop-card__meta,
+.shop-card__rating,
+.shop-card__badges,
+.shop-card__badge,
+.btn-shop,
+.back-to-top__btn,
+.footer-inner,
+.brand-top,
+.banner-product__favorite,
+.banner-product__title-product,
+.banner-product--dent .banner-product__header,
+.banner-product--icecream .banner-product__header,
+.banner-product--fresh .banner-product__header,
+.banner-product--quick .banner-product__header,
+.banner-product--dent .banner-product__body,
+.banner-product--icecream .banner-product__body,
+.banner-product--fresh .banner-product__body,
+.banner-product--quick .banner-product__body,
+.detail-product,
+.detail-product__wrapper,
+.detail-product__badge-wrapper,
+.detail-product__action-btn,
+.detail-product__image-wrapper,
+.detail-product__footer,
+.detail-product__price-current,
+.detail-product__discount-wrapper {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+/* ---------- justify-center (justify-content: center) ---------- */
+.basket,
+.banner-product__more-btn,
+.banner-product__add-btn,
+.swiper-pagination,
+.shop-card__rating,
+.btn-shop,
+.back-to-top__btn,
+.brand-top,
+.banner-product__favorite,
+.register-section-product,
+.banner-product--dent .banner-product__more-btn,
+.banner-product--icecream .banner-product__more-btn,
+.banner-product--fresh .banner-product__more-btn,
+.banner-product--quick .banner-product__more-btn,
+.brand-text-group,
+.detail-product,
+.detail-product__wrapper,
+.detail-product__action-btn,
+.detail-product__image-wrapper,
+.detail-product__price-current,
+.detail-product__discount-wrapper {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+/* ---------- justify-between (justify-content: space-between) ---------- */
+.parent-header,
+.banner-product__header,
+.category-slider__header,
+.category-slider__title,
+.category-slider__more-btn,
+.category-slider__body,
+.banner-product__body,
+.footer-inner,
+.banner-product--dent .banner-product__header,
+.banner-product--icecream .banner-product__header,
+.banner-product--fresh .banner-product__header,
+.banner-product--quick .banner-product__header,
+.banner-product--dent .banner-product__body,
+.banner-product--icecream .banner-product__body,
+.banner-product--fresh .banner-product__body,
+.banner-product--quick .banner-product__body,
+.detail-product__badge-wrapper,
+.detail-product__footer {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+/* ---------- flex-shrink-0 (flex-shrink: 0) ---------- */
+.header-location,
+.banner-product__more-btn,
+.banner-product__add-btn,
+.shop-card__figure,
+.category-slider__more-btn,
+.banner-product--dent .banner-product__more-btn,
+.banner-product--icecream .banner-product__more-btn,
+.banner-product--fresh .banner-product__more-btn,
+.banner-product--quick .banner-product__more-btn {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+/* ---------- w-100 (width: 100%) ---------- */
+.back-to-top {
+  width: 100%;
+}
+/* ---------- h-100 (height: 100%) ---------- */
+.back-to-top__link {
+  height: 100%;
+}
+/* ---------- ellipsis (text-overflow: ellipsis) ---------- */
+.category-slider__label,
+.shop-card__store-name,
+.banner-product__title-product {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

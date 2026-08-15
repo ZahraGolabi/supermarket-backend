@@ -1,0 +1,59 @@
+.footer-inner {
+  padding: 2rem 10px 10px 10px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.brand-top {
+  gap: 19px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.brand-logo-icon {
+  width: 180px;
+  height: 74px;
+}
+.brand-text-group {
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.brand-name {
+  font-family: "IRANSans-Bold";
+  font-size: 18px;
+  margin: 8px 0;
+  color: var(--color-orange);
+}
+.expers-name {
+  color: var(--clr-natural2);
+  padding: 0 1rem;
+}
+.brand-copyright {
+  color: var(--clr-natural3);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 3rem 0 2rem 0;
+}
+.footer-links-section {
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 0 8rem;
+}
+.footer-link-list {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 5px;
+}
+.footer-link {
+  color: var(--clr-natural3);
+}

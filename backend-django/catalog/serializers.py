@@ -1,0 +1,63 @@
+from rest_framework import serializers
+
+from catalog.models import Brand, Category, Good
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    createdAt = serializers.DateTimeField(source='created_at', read_only=True)
+    updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'title', 'description', 'createdAt', 'updatedAt']
+        read_only_fields = ['id', 'createdAt', 'updatedAt']
+
+
+class BrandSerializer(serializers.ModelSerializer):
+    categoryId = serializers.PrimaryKeyRelatedField(
+        source='category', queryset=Category.objects.all()
+    )
+    createdAt = serializers.DateTimeField(source='created_at', read_only=True)
+    updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
+
+    class Meta:
+        model = Brand
+        fields = ['id', 'name', 'description', 'categoryId', 'createdAt', 'updatedAt']
+        read_only_fields = ['id', 'createdAt', 'updatedAt']
+
+
+class GoodSerializer(serializers.ModelSerializer):
+    brandId = serializers.PrimaryKeyRelatedField(
+        source='brand', queryset=Brand.objects.all(), required=False, allow_null=True
+    )
+    categoryId = serializers.PrimaryKeyRelatedField(
+        source='category', queryset=Category.objects.all(), required=False, allow_null=True
+    )
+    weightVolume = serializers.CharField(source='weight_volume', required=False, allow_null=True)
+    discountPercent = serializers.IntegerField(source='discount_percent', required=False, default=0)
+    stockQuantity = serializers.IntegerField(source='stock_quantity', required=False, default=0)
+    isAvailable = serializers.BooleanField(source='is_available', required=False, default=True)
+    isFeatured = serializers.BooleanField(source='is_featured', required=False, default=False)
+    isHealthy = serializers.BooleanField(source='is_healthy', required=False, default=False)
+    createdAt = serializers.DateTimeField(source='created_at', read_only=True)
+    updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
+
+    class Meta:
+        model = Good
+        fields = [
+            'id', 'title', 'slug', 'description', 'weightVolume', 'ingredients',
+            'barcode', 'price', 'discountPercent', 'stockQuantity', 'isAvailable',
+            'isFeatured', 'isHealthy', 'unit', 'brandId', 'categoryId',
+            'createdAt', 'updatedAt',
+        ]
+        read_only_fields = ['id', 'createdAt', 'updatedAt']
+
+    def validate_discountPercent(self, value):
+        if value < 0 or value > 100:
+            raise serializers.ValidationError('Discount must be between 0 and 100')
+        return value
+
+    def validate_price(self, value):
+        if value < 0:
+            raise serializers.ValidationError('Price cannot be negative')
+        return value

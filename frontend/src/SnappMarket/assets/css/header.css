@@ -1,0 +1,206 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 9;
+}
+
+.parent-header {
+  background-color: var(--clr-white);
+  gap: 1rem;
+  border-block: 0.5px solid var(--clr-grey-1);
+  width: 100%;
+  min-height: 76px;
+}
+.header-logo svg {
+  height: 70px;
+  width: 100px;
+}
+.header-search {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+.header-search__icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background-color: var(--background-color);
+  color: var(--clr-gray);
+  pointer-events: none;
+}
+.header-search__input {
+  width: 100%;
+  padding: 15px 40px 15px 16px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  color: var(--clr-gray);
+  border: none;
+  outline: none;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.header-search__input::-webkit-input-placeholder {
+  font-size: inherit;
+  padding-right: 0.5rem;
+}
+.header-search__input::-moz-placeholder {
+  font-size: inherit;
+  padding-right: 0.5rem;
+}
+.header-search__input:-ms-input-placeholder {
+  font-size: inherit;
+  padding-right: 0.5rem;
+}
+.header-search__input::-ms-input-placeholder {
+  font-size: inherit;
+  padding-right: 0.5rem;
+}
+.header-search__input::placeholder {
+  font-size: inherit;
+  padding-right: 0.5rem;
+}
+.header-location {
+  gap: 12px;
+  border: 1px solid var(--clr-natural4);
+  padding: 8px 12px;
+  color: var(--clr-primary);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  font-size: 14px;
+}
+.header-location__pin {
+  color: var(--clr-primary);
+}
+.basket {
+  width: 50px;
+  height: 50px;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.basket__icon {
+  color: var(--clr-black);
+}
+
+.login-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.login {
+  padding: 8px 16px;
+  color: var(--clr-white);
+  background-color: var(--clr-primary);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-right: 3rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__body {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 320px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  outline: none;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  display: none;
+  visibility: hidden;
+  transition: var(--transition);
+}
+.show-panel {
+  display: block;
+  visibility: visible;
+}
+
+.login__profile-wrapper {
+  color: rgba(0, 0, 0, 0.45);
+  transition: var(--transition);
+  border-bottom: 1px solid #e7dede;
+  padding-bottom: 5px;
+  margin-top: 0.75rem;
+  transition: var(--transition);
+}
+
+.login__profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 5px 12px;
+  height: 55px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.login__profile-avatar--wrapper {
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.login__profile:hover {
+  background-color: #cac7c78e;
+}
+
+.login__profile-avatar-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.login__profile-info {
+  padding-right: 0.5rem;
+}
+.login__profile-name {
+  font-size: 14px;
+  margin: 0;
+  color: var(--clr-black);
+}
+.login__profile-desc {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #737373;
+}
+
+.basket:hover {
+  background-color: var(--background-color);
+  border-radius: 20%;
+}
+.login:hover {
+  opacity: 0.9;
+}
+.header-location:hover {
+  background-color: var(--background-color);
+}
+
+/* font awseom icon  */
+.fa-user,
+.fa-circle-user {
+  color: #000;
+  font-size: 30px;
+}
