@@ -137,6 +137,8 @@ python manage.py seed_owner
 ### گام ۶ — اجرای سرور
 
 ```bash
+cd backend-django
+.\venv\Scripts\Activate.ps1
 python manage.py runserver 8000
 ```
 
