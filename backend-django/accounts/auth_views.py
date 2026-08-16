@@ -5,7 +5,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from accounts.models import User, UserRole
-from accounts.serializers import RegisterByPhoneSerializer, VerifyByPhoneSerializer
+from accounts.serializers import (
+    OtpResponseSerializer,
+    RegisterByPhoneSerializer,
+    SuccessResponseSerializer,
+    VerifyByPhoneSerializer,
+)
 from accounts.services import JWTService, OTPService, set_auth_cookies
 
 
@@ -15,7 +20,7 @@ class RegisterByPhoneView(APIView):
 
     @extend_schema(
         request=RegisterByPhoneSerializer,
-        responses={200: dict},
+        responses={200: OtpResponseSerializer, 429: dict},
         tags=['Auth'],
         summary='ثبت‌نام / ارسال OTP',
     )
@@ -45,7 +50,7 @@ class VerifyByPhoneView(APIView):
 
     @extend_schema(
         request=VerifyByPhoneSerializer,
-        responses={200: dict},
+        responses={200: SuccessResponseSerializer},
         tags=['Auth'],
         summary='تأیید OTP و ورود',
     )
@@ -88,7 +93,8 @@ class RefreshTokenView(APIView):
     authentication_classes = []
 
     @extend_schema(
-        responses={200: dict},
+        request=None,
+        responses={200: SuccessResponseSerializer},
         tags=['Auth'],
         summary='تمدید access token',
     )

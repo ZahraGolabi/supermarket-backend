@@ -5,6 +5,15 @@ from rest_framework import serializers
 from accounts.models import Gender, User
 
 
+class SuccessResponseSerializer(serializers.Serializer):
+    success = serializers.BooleanField()
+
+
+class OtpResponseSerializer(serializers.Serializer):
+    message = serializers.CharField()
+    otp = serializers.CharField(required=False)
+
+
 class RegisterByPhoneSerializer(serializers.Serializer):
     phone = serializers.CharField(max_length=11)
 

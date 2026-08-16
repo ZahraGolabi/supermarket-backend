@@ -23,12 +23,14 @@ class CategoryViewSet(viewsets.ModelViewSet):
     lookup_field = 'id'
 
     def get_permissions(self):
-        if self.request.method in ('GET', 'HEAD', 'OPTIONS'):
+        method = getattr(self.request, 'method', None)
+        if method in ('GET', 'HEAD', 'OPTIONS', None):
             return [AllowAny()]
         return [IsAuthenticated(), IsOwnerOrAdmin()]
 
     def get_authenticators(self):
-        if self.request.method in ('GET', 'HEAD', 'OPTIONS'):
+        method = getattr(self.request, 'method', None)
+        if method in ('GET', 'HEAD', 'OPTIONS', None):
             return []
         return super().get_authenticators()
 
@@ -75,7 +77,8 @@ class GoodViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
 
     def get_permissions(self):
-        if self.request.method == 'POST':
+        method = getattr(self.request, 'method', None)
+        if method == 'POST':
             return [IsAuthenticated(), IsOwnerOrAdmin()]
         return [IsAuthenticated()]
 
