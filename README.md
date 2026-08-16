@@ -1,6 +1,6 @@
 # 🛍️ SnapShop
 
-> UI complete. JavaScript in progress.
+> UI complete · JavaScript in progress · Django backend ready
 
 ---
 
@@ -8,51 +8,64 @@
 
 👉 [https://supermarket-backend-sigma.vercel.app/](https://supermarket-backend-sigma.vercel.app/)
 
-## 📊 Status
+---
+
+## 📊 Project Status
 
 | Layer | Status |
 |-------|--------|
-| 🎨 UI/UX |  **Completed** — Fully responsive, pixel-perfect, RTL |
-| ⚡ JavaScript |  **Active development** — Making the UI interactive |
-| 🗄️ Backend |  On the horizon |
+| 🎨 UI/UX | ✅ Complete |
+| ⚡ JavaScript | 🔄 In development |
+| 🗄️ Backend | ✅ Django API ready |
 
 ---
 
-## 💡 The Story
+## 📖 About
 
 This is my **first real frontend project** — a complete, mobile-first clone of Snap Food Store.  
 Built over 6 months of learning, failing, and figuring things out.  
 
-**But I didn't stop at the design. I'm taking it all the way.**
+**I didn't stop at the design. I'm taking it all the way.**
 
 ---
 
-## ✅ What's Already Done
+## ✅ Features
 
-- Full homepage with product grid and categories  
-- Shopping cart and product detail pages  
-- Flawless responsiveness — phone, tablet, desktop  
-- Dark/Light mode  
-- Persian-first RTL design  
+### Frontend
+- [x] Full homepage with product grid and categories
+- [x] Shopping cart and product detail pages
+- [x] Fully responsive (mobile, tablet, desktop)
+- [x] Dark/Light mode toggle
+- [x] Persian RTL design
+- [ ] Cart logic (add, remove, update) — *in progress*
+- [ ] LocalStorage persistence — *in progress*
+- [ ] Live search and filtering — *in progress*
+
+### Backend (Django REST API)
+- [x] JWT authentication via HTTP-only cookies
+- [x] OTP phone verification
+- [x] Category, Brand, Product CRUD
+- [x] User profile management
+- [x] Swagger API documentation
+- [x] Admin panel
 
 ---
 
-## ⚡ What I'm Coding Right Now
+## 🛠️ Tech Stack
 
-JavaScript is the current focus. Daily progress.
-
-- Cart logic — add, remove, update quantities  
-- Persistent cart with LocalStorage  
-- Live search and product filtering  
-- Dynamic content rendering
+| Layer | Technology |
+|-------|------------|
+| Frontend | HTML5 · CSS3 · Vanilla JavaScript |
+| Backend | Django · Django REST Framework |
+| Auth | JWT · HTTP-only cookies |
+| Database | SQLite / MySQL |
+| Tools | SweetAlert2 · LocalStorage · dotenv |
 
 ---
 
-## 🛠️ Built With
-## 🗄️ Backend (Django)
+## 🚀 Quick Start
 
-راهنمای کامل صفر تا صد (Backend + API + اتصال فرانت): **[backend-django/README.md](backend-django/README.md)**  
-→ بخش [اتصال فرانت‌اند به API](backend-django/README.md#۹-اتصال-فرانت‌اند-به-api-صفر-تا-صد)
+### Backend Setup
 
 ```bash
 cd backend-django
@@ -63,12 +76,3 @@ copy .env.example .env
 python manage.py migrate
 python manage.py seed_owner
 python manage.py runserver 8000
-```
-
-- API: http://127.0.0.1:8000/api
-- Swagger: http://127.0.0.1:8000/docs
-- Admin: http://127.0.0.1:8000/admin (`09111111111` / `admin1234`)
-
----
-
-**HTML · CSS · Vanilla JavaScript**
