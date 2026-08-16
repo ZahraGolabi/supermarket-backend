@@ -40,50 +40,58 @@ const register = async () => {
 
 const handleOtpVerification = async (otpCode) => {
   const userPhone = getLocalstorage();
+  if (!userPhone || !userPhone.phone) {
+    await showSwal("خطا", "شماره تلفن یافت نشد", "error", "تلاش مجدد");
+    return;
+  }
   const userInfo = {
     phone: userPhone.phone,
     otp: otpCode,
   };
-  const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userInfo),
-    credentials: "include",
-  });
-  const data = await response.json();
-  if (response.ok) {
-    const result = await showSwal(
-      "موفقیت",
-      "ورود شما با موفقیت انجام شد",
-      "success",
-      "ورود ",
-    );
-    const res = await fetch(`${baseURL}/users/me`, {
+  try {
+    const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(userInfo),
       credentials: "include",
     });
-    const user = await res.json();
-    if (user.firstName && user.lastName) {
-      location.href = "index.html";
-    } else {
-      location.href = "register.html";
-    }
-  } else {
-    await showSwal(
-      "خطا",
-      "کد تایید نامعتبر است یا منقضی شده است",
-      "error",
-      "تلاش مجدد",
-    );
-  }
-  console.log(data);
-  console.log(response);
+    const data = await response.json();
+    if (response.ok) {
+      const result = await showSwal(
+        "موفقیت",
+        "ورود شما با موفقیت انجام شد",
+        "success",
+        "ورود ",
+      );
+      const res = await fetch(`${baseURL}/users/me`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const user = await res.json();
 
-  return data;
+      if (user.firstName && user.lastName) {
+        location.href = "index.html";
+      } else {
+        location.href = "register.html";
+      }
+    } else {
+      await showSwal(
+        "خطا",
+        "کد تایید نامعتبر است یا منقضی شده است",
+        "error",
+        "تلاش مجدد",
+      );
+    }
+
+    return data;
+  } catch {
+    console.error("خطا:", error);
+    await showSwal("خطا", "مشکل در ارتباط با سرور", "error", "تلاش مجدد");
+  }
 };
 
 const getInformationsUser = async () => {
@@ -120,8 +128,8 @@ const getMe = async () => {
   });
   const data = await response.json();
   return data;
-
-  console.log(token);
 };
+
+
 
 export { register, handleOtpVerification, getInformationsUser, getMe };
