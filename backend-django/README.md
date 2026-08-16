@@ -15,7 +15,7 @@
 6. [Swagger — مستندات API](#۶-swagger--مستندات-api)
 7. [لیست کامل APIها](#۷-لیست-کامل-apiها)
 8. [احراز هویت (Auth Flow)](#۸-احراز-هویت-auth-flow)
-9. [اتصال فرانت‌اند به API](#۹-اتصال-فرانت‌اند-به-api)
+9. [اتصال فرانت‌اند به API (صفر تا صد)](#۹-اتصال-فرانت‌اند-به-api-صفر-تا-صد)
 10. [نقش‌ها و دسترسی‌ها](#۱۰-نقش‌ها-و-دسترسی‌ها)
 11. [Docker](#۱۱-docker)
 12. [عیب‌یابی](#۱۲-عیب‌یابی)
@@ -322,59 +322,452 @@ Cookies: `X-JWT-ACCESS`, `X-JWT-REFRESH`
 
 ---
 
-## ۹. اتصال فرانت‌اند به API
+## ۹. اتصال فرانت‌اند به API (صفر تا صد)
 
-### تنظیمات فعلی (تغییر minimal)
+> این بخش برای فرانت‌اند دولوپر نوشته شده — چطور UI موجود را به API وصل کند.
 
-فایل `frontend/src/SnappMarket/assets/js/config.js`:
+---
+
+### ۹.۱ عکس محصولات از کجا می‌آید؟
+
+#### وضعیت فعلی: **استاتیک — نه از API**
+
+الان عکس‌ها داخل خود فرانت هستند:
+
+```
+frontend/src/SnappMarket/assets/img/
+├── 1.webp, 2.webp, ... 73.webp
+├── default.webp
+└── ...
+```
+
+در HTML به‌صورت hardcode استفاده شده:
+
+```html
+<img class="banner-product__image" src="assets/img/25.webp" alt="محصول" />
+```
+
+| موضوع | وضعیت |
+|-------|--------|
+| عنوان، قیمت، تخفیف | داخل HTML نوشته شده — از API نمی‌آید |
+| API محصول `/api/good/` | فیلد **image** ندارد |
+| آپلود عکس | هنوز پیاده نشده |
+
+#### راه‌حل‌های ممکن
+
+| روش | توضیح |
+|-----|-------|
+| **فاز ۱ (سریع)** | عکس را با `slug` یا index محصول map کن — `{index}.webp` در assets |
+| **فاز ۲ (درست)** | فیلد `image` به مدل Good اضافه شود + آپلود در Admin |
+| **فاز ۳** | S3 / CDN برای production |
+
+**تا وقتی image به API اضافه نشده:**
 
 ```javascript
+const getProductImage = (product, index = 0) => {
+  const imgNum = (index % 73) + 1;
+  return `assets/img/${imgNum}.webp`;
+};
+```
+
+---
+
+### ۹.۲ چه چیزهایی به API وصل شده؟
+
+| بخش | وضعیت | فایل |
+|-----|--------|------|
+| ثبت‌نام / OTP | ✅ وصل | `modules/auth/auth.js` |
+| پروفایل کاربر | ✅ وصل | `modules/auth/auth.js` |
+| navbar (نام کاربر) | ✅ وصل | `modules/auth/getcurrentuser.js` |
+| لیست محصولات | ❌ static HTML | — |
+| دسته‌بندی | ❌ static HTML | `category.js` خالی |
+| سبد خرید | ❌ static HTML | — |
+| جستجو | ❌ static HTML | — |
+
+**Config API:**
+
+```javascript
+// frontend/src/SnappMarket/assets/js/config.js
 export const baseURL = "http://127.0.0.1:8000/api";
 ```
 
-### اجرای فرانت
+---
 
-فرانت HTML استاتیک است. با **Live Server** (VS Code) یا هر static server:
+### ۹.۳ اجرای همزمان Backend + Frontend
 
-1. پوشه `frontend/src/SnappMarket/` را serve کن
-2. مثلاً: `http://127.0.0.1:5500/SnappMarket/login.html`
-3. مطمئن شو backend روی `8000` در حال اجراست
+```powershell
+# Terminal 1 — Backend
+cd backend-django
+.\venv\Scripts\Activate.ps1
+python manage.py runserver 8000
 
-### فایل‌های JS متصل به API
+# Terminal 2 — Frontend (Live Server در VS Code)
+# پوشه: frontend/src/SnappMarket/
+# آدرس: http://127.0.0.1:5500/index.html
+```
 
-| فایل | API |
-|------|-----|
-| `modules/auth/auth.js` | register, verify, update-profile |
-| `modules/auth/getcurrentuser.js` | GET /users/me |
-| `modules/utils/utils.js` | fetchApi + refresh-token |
+---
 
-### Flow کاربر در فرانت
+### ۹.۴ قانون طلایی: Cookie-based Auth
 
-1. `login.html` → شماره موبایل → `POST /auth/register-by-phone`
-2. OTP در popup نمایش داده می‌شود (فقط dev)
-3. `passwordLogin.html` → OTP → `POST /auth/verify-by-phone`
-4. اگر firstName/lastName نداشت → `register.html`
-5. `PUT /users/update-profile` → redirect به `index.html`
+برای **همه** requestهای protected:
+
+```javascript
+fetch(url, {
+  credentials: "include",  // ← حتماً — JWT cookie فرستاده می‌شود
+  headers: { "Content-Type": "application/json" },
+});
+```
+
+تابع آماده در پروژه:
+
+```javascript
+import { fetchApi } from "./modules/utils/utils.js";
+// خودکار refresh-token می‌زند اگر 401 بگیرد
+```
+
+---
+
+### ۹.۵ جزئیات APIها برای فرانت
+
+#### AUTH
+
+**`POST /auth/register-by-phone`** — Public
+
+```json
+// Request
+{ "phone": "09123456789" }
+
+// Response 200
+{ "message": "otp sent to your phone", "otp": "12345" }
+// otp فقط در DEBUG=True — production پیامک می‌رود
+
+// Response 429 — OTP قبلاً ارسال شده، ۲ دقیقه صبر کن
+```
+
+**`POST /auth/verify-by-phone`** — Public
+
+```json
+// Request
+{ "phone": "09123456789", "otp": "12345" }
+
+// Response 200 + Cookies: X-JWT-ACCESS, X-JWT-REFRESH
+{ "success": true }
+```
+
+**`POST /auth/refresh-token`** — Public (نیاز به cookie refresh)
+
+```json
+{ "success": true }
+```
+
+---
+
+#### USERS — نیاز به login
+
+**`GET /users/me`**
+
+```json
+{
+  "id": "uuid",
+  "firstName": "زهرا",
+  "lastName": "گلابی",
+  "phone": "09123456789",
+  "role": "user",
+  "email": null,
+  "gender": "woman",
+  "birthDate": "1995-05-20",
+  "createdAt": "2026-08-15T...",
+  "updatedAt": "2026-08-15T..."
+}
+```
+
+**`PUT /users/update-profile`**
+
+```json
+{
+  "firstName": "زهرا",
+  "lastName": "گلابی",
+  "birthDate": "1995-05-20",
+  "gender": "woman"
+}
+```
+
+---
+
+#### CATEGORY — Public (بدون login)
+
+**`GET /category/?page=1&limit=20&filter.title=$ilike:لبنیات`**
+
+```json
+{
+  "data": [
+    {
+      "id": "uuid",
+      "title": "لبنیات",
+      "description": "شیر، ماست، پنیر",
+      "createdAt": "...",
+      "updatedAt": "..."
+    }
+  ],
+  "meta": {
+    "itemsPerPage": 20,
+    "totalItems": 5,
+    "currentPage": 1,
+    "totalPages": 1
+  }
+}
+```
+
+---
+
+#### GOOD (Product) — نیاز به login ⭐
+
+**`GET /good/?page=1&limit=20&search=شیر&categoryId=uuid&isAvailable=true`**
+
+```json
+{
+  "data": [
+    {
+      "id": "uuid",
+      "title": "شیر کم چرب 1 لیتری",
+      "slug": "shir-kom-charb-1-litri",
+      "description": "شیر pasteurized",
+      "weightVolume": "1L",
+      "barcode": "1234567890",
+      "price": 45000,
+      "discountPercent": 10,
+      "stockQuantity": 100,
+      "isAvailable": true,
+      "isFeatured": false,
+      "isHealthy": false,
+      "unit": "عدد",
+      "brandId": "uuid",
+      "categoryId": "uuid",
+      "createdAt": "...",
+      "updatedAt": "..."
+    }
+  ],
+  "meta": { "itemsPerPage": 20, "totalItems": 10, "currentPage": 1, "totalPages": 1 }
+}
+```
+
+> **توجه:** فیلد `image` وجود ندارد — عکس از assets محلی map شود.
+
+**`GET /good/{id}/`** — جزئیات یک محصول
+
+**`POST /good/`** — owner/admin (ایجاد از Admin یا Swagger)
+
+---
+
+#### BRAND — نیاز به login
+
+**`GET /brand/`** — لیست برندها
+
+```json
+{
+  "id": "uuid",
+  "name": "کاله",
+  "description": "برند لبنیات",
+  "categoryId": "uuid-of-category"
+}
+```
+
+---
+
+### ۹.۶ Flow کاربر (Auth — قبلاً وصل شده)
+
+```
+login.html
+   │  POST /auth/register-by-phone
+   ▼
+passwordLogin.html
+   │  POST /auth/verify-by-phone  → Cookie JWT
+   ▼
+register.html (اگر firstName/lastName نداشت)
+   │  PUT /users/update-profile
+   ▼
+index.html
+   │  GET /users/me
+```
+
+---
+
+### ۹.۷ وارد کردن داده تست (Admin)
+
+1. http://127.0.0.1:8000/admin
+2. Login: `09111111111` / `admin1234`
+3. Category اضافه کن (مثلاً «لبنیات»)
+4. Brand اضافه کن (مثلاً «کاله»)
+5. Good اضافه کن (چند محصول با قیمت)
+
+---
+
+### ۹.۸ کد نمونه — `products.js`
+
+```javascript
+// frontend/src/SnappMarket/assets/js/modules/products/products.js
+import { baseURL } from "../../config.js";
+import { fetchApi } from "../utils/utils.js";
+
+export const getProducts = async (page = 1, limit = 20) => {
+  const res = await fetchApi(`${baseURL}/good/?page=${page}&limit=${limit}`);
+  if (!res.ok) throw new Error("Failed to load products");
+  return res.json();
+};
+
+export const getProductsByCategory = async (categoryId) => {
+  const res = await fetchApi(`${baseURL}/good/?categoryId=${categoryId}`);
+  return res.json();
+};
+
+export const searchProducts = async (query) => {
+  const res = await fetchApi(`${baseURL}/good/?search=${encodeURIComponent(query)}`);
+  return res.json();
+};
+
+export const getProduct = async (id) => {
+  const res = await fetchApi(`${baseURL}/good/${id}/`);
+  return res.json();
+};
+
+export const getProductImage = (product, index = 0) => {
+  const imgNum = (index % 73) + 1;
+  return `assets/img/${imgNum}.webp`;
+};
+
+export const getFinalPrice = (product) => {
+  if (!product.discountPercent) return product.price;
+  return Math.round(product.price * (1 - product.discountPercent / 100));
+};
+
+export const formatPrice = (price) => price.toLocaleString("fa-IR") + " تومان";
+```
+
+---
+
+### ۹.۹ کد نمونه — Render محصولات
+
+```javascript
+// frontend/src/SnappMarket/assets/js/modules/products/render.js
+import { getProducts, getProductImage, getFinalPrice, formatPrice } from "./products.js";
+
+const renderProductCard = (product, index) => {
+  const finalPrice = getFinalPrice(product);
+  const hasDiscount = product.discountPercent > 0;
+
+  return `
+    <div class="banner-product__info product-card__item" data-id="${product.id}">
+      <div class="banner-product__image-wapper product-card__image">
+        ${hasDiscount ? `<span class="banner-product__discount">${product.discountPercent}%</span>` : ""}
+        <img class="banner-product__image"
+             src="${getProductImage(product, index)}"
+             alt="${product.title}" />
+        <div class="banner-product__add-btn">
+          <button class="add-to-cart-btn" data-id="${product.id}">+</button>
+        </div>
+      </div>
+      <span class="banner-product__title-product">${product.title}</span>
+      <span class="banner-product__price-current">${formatPrice(finalPrice)}</span>
+      ${hasDiscount ? `<del class="banner-product__price-old">${formatPrice(product.price)}</del>` : ""}
+    </div>
+  `;
+};
+
+export const loadAndRenderProducts = async (containerSelector) => {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  const { data: products } = await getProducts(1, 20);
+  container.innerHTML = products.map(renderProductCard).join("");
+};
+```
+
+**صدا زدن در homepage:**
+
+```javascript
+import { loadAndRenderProducts } from "./modules/products/render.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadAndRenderProducts(".product-card__wrapper");
+});
+```
+
+---
+
+### ۹.۱۰ کد نمونه — دسته‌بندی
+
+```javascript
+// frontend/src/SnappMarket/assets/js/modules/utils/category/category.js
+import { baseURL } from "../../config.js";
+
+export const getCategories = async () => {
+  const res = await fetch(`${baseURL}/category/`); // public
+  return res.json();
+};
+
+export const renderCategories = async (containerSelector) => {
+  const { data: categories } = await getCategories();
+  const container = document.querySelector(containerSelector);
+  container.innerHTML = categories.map(cat => `
+    <a href="CategoriesPage.html?category=${cat.id}" class="category-item">
+      ${cat.title}
+    </a>
+  `).join("");
+};
+```
+
+---
+
+### ۹.۱۱ ساختار پیشنهادی JS
+
+```
+assets/js/
+├── config.js                    ← baseURL
+├── app.js                       ← UI events
+└── modules/
+    ├── auth/
+    │   ├── auth.js              ✅ موجود
+    │   └── getcurrentuser.js    ✅ موجود
+    ├── utils/
+    │   ├── utils.js             ✅ fetchApi + refresh
+    │   └── category/category.js 🆕 پر شود
+    └── products/
+        ├── products.js          🆕 API calls
+        └── render.js            🆕 DOM rendering
+```
+
+---
+
+### ۹.۱۲ چک‌لیست اتصال فرانت
+
+```
+□ backend روی port 8000 اجرا شود
+□ config.js → baseURL = http://127.0.0.1:8000/api
+□ Auth flow تست شود (login → OTP → index)
+□ از Admin چند Category + Good اضافه شود
+□ products.js و render.js ساخته شود
+□ عکس با mapping local وصل شود (API image ندارد)
+□ CategoriesPage از GET /category/ استفاده کند
+□ fetchApi + credentials:"include" در همه requestها
+□ Swagger تست شود: http://127.0.0.1:8000/docs
+```
+
+---
+
+### ۹.۱۳ اولویت کار فرانت
+
+| اولویت | کار | API |
+|--------|-----|-----|
+| 1 | Auth | ✅ done |
+| 2 | Dynamic products | `GET /good/` |
+| 3 | Categories | `GET /category/` |
+| 4 | Cart | localStorage (API ندارد) |
+| 5 | Search | `GET /good/?search=` |
 
 ### نکته CORS
 
 Backend `CORS_ALLOW_ALL_ORIGINS=True` و `credentials=True` دارد — فرانت از هر port محلی کار می‌کند.
-
-### اتصال محصولات به API (مرحله بعد — اختیاری)
-
-فرانت فعلاً محصولات static در HTML دارد. برای dynamic کردن:
-
-```javascript
-import { baseURL } from "../../config.js";
-import { fetchApi } from "../utils/utils.js";
-
-const loadProducts = async () => {
-  const res = await fetchApi(`${baseURL}/good/?page=1&limit=20`);
-  const json = await res.json();
-  const products = json.data; // paginated
-  // render در DOM
-};
-```
 
 ---
 

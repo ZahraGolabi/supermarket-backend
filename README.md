@@ -50,7 +50,8 @@ JavaScript is the current focus. Daily progress.
 
 ## 🗄️ Backend (Django)
 
-راهنمای کامل صفر تا صد: **[backend-django/README.md](backend-django/README.md)**
+راهنمای کامل صفر تا صد (Backend + API + اتصال فرانت): **[backend-django/README.md](backend-django/README.md)**  
+→ بخش [اتصال فرانت‌اند به API](backend-django/README.md#۹-اتصال-فرانت‌اند-به-api-صفر-تا-صد)
 
 ```bash
 cd backend-django
