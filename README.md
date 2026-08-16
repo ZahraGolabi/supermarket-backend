@@ -8,7 +8,6 @@
 
 👉 [https://supermarket-backend-sigma.vercel.app/](https://supermarket-backend-sigma.vercel.app/)
 
-
 ## 📊 Status
 
 | Layer | Status |

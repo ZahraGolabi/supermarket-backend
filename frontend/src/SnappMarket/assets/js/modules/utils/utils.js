@@ -1,3 +1,6 @@
+
+import { baseURL } from "../../config.js";
+
 const showSwal = (title, text, icon, confirmButtonText) => {
   return Swal.fire({
     title,
@@ -41,6 +44,7 @@ const fetchApi = async (url, option = {}) => {
 
     const responseRefresh = await fetch(
       `http://127.0.0.1:3000/api/auth/refresh-token`,
+      `${baseURL}/auth/refresh-token`,
       {
         method: "POST",
         headers: {
