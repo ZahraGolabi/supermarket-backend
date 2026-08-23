@@ -28,7 +28,7 @@ const register = async () => {
     });
     const data = await response.json();
     if (response.ok) {
-      await showSwal("کد تایید", data.otp, "info", "متوجه شدم");
+      await showSwal("کد تایید", "44444", "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
       window.location.href = "passwordLogin.html";
     }
@@ -57,8 +57,10 @@ const handleOtpVerification = async (otpCode) => {
       body: JSON.stringify(userInfo),
       credentials: "include",
     });
+
+    console.log("response",response);
+    
     const data = await response.json();
-    if (response.ok) {
       const result = await showSwal(
         "موفقیت",
         "ورود شما با موفقیت انجام شد",
@@ -71,6 +73,8 @@ const handleOtpVerification = async (otpCode) => {
         },
         credentials: "include",
       });
+      console.log(res);
+      
       const user = await res.json();
 
       if (user.firstName && user.lastName) {
@@ -78,15 +82,7 @@ const handleOtpVerification = async (otpCode) => {
       } else {
         location.href = "register.html";
       }
-    } else {
-      await showSwal(
-        "خطا",
-        "کد تایید نامعتبر است یا منقضی شده است",
-        "error",
-        "تلاش مجدد",
-      );
-    }
-
+    
     return data;
   } catch {
     console.error("خطا:", error);
@@ -112,8 +108,11 @@ const getInformationsUser = async () => {
     },
     body: JSON.stringify(newUserInfos),
   });
-
+  // console.log(responseRefresh);
+  
   const data = await responseRefresh.json();
+  // console.log(data);
+  
   if (responseRefresh.status == 200) {
     window.location.href = "index.html";
   }
