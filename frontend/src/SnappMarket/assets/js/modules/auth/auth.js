@@ -38,17 +38,34 @@ const register = async () => {
   }
 };
 
+const toEnglishDigits = (value = "") =>
+  value.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+
+let isVerifyingOtp = false;
+
 const handleOtpVerification = async (otpCode) => {
+  if (isVerifyingOtp) return;
+
   const userPhone = getLocalstorage();
-  if (!userPhone || !userPhone.phone) {
+  if (!userPhone?.phone) {
     await showSwal("خطا", "شماره تلفن یافت نشد", "error", "تلاش مجدد");
+    window.location.href = "login.html";
     return;
   }
+
+  const otp = toEnglishDigits(String(otpCode ?? "").trim());
+  if (otp.length !== 5) {
+    await showSwal("خطا", "کد تایید باید ۵ رقم باشد", "error", "متوجه شدم");
+    return;
+  }
+
   const userInfo = {
-    phone: userPhone.phone,
-    otp: otpCode,
+    phone: toEnglishDigits(userPhone.phone),
+    otp,
   };
+
   try {
+    isVerifyingOtp = true;
     const response = await fetch(`${baseURL}/auth/verify-by-phone`, {
       method: "POST",
       headers: {
@@ -58,39 +75,39 @@ const handleOtpVerification = async (otpCode) => {
       credentials: "include",
     });
     const data = await response.json();
-    if (response.ok) {
-      const result = await showSwal(
-        "موفقیت",
-        "ورود شما با موفقیت انجام شد",
-        "success",
-        "ورود ",
-      );
-      const res = await fetch(`${baseURL}/users/me`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      const user = await res.json();
 
-      if (user.firstName && user.lastName) {
-        location.href = "index.html";
-      } else {
-        location.href = "register.html";
-      }
-    } else {
+    if (!response.ok) {
       await showSwal(
         "خطا",
-        "کد تایید نامعتبر است یا منقضی شده است",
+        data?.message || "کد تایید نامعتبر است یا منقضی شده است",
         "error",
         "تلاش مجدد",
       );
+      return data;
     }
 
+    const res = await fetch(`${baseURL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    let redirectUrl = "register.html";
+    if (res.ok) {
+      const user = await res.json();
+      if (user.firstName && user.lastName) {
+        redirectUrl = "index.html";
+      }
+    }
+
+    window.location.href = redirectUrl;
     return data;
-  } catch {
+  } catch (error) {
     console.error("خطا:", error);
     await showSwal("خطا", "مشکل در ارتباط با سرور", "error", "تلاش مجدد");
+  } finally {
+    isVerifyingOtp = false;
   }
 };
 

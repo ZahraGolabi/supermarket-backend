@@ -9,6 +9,10 @@ from catalog.models import Brand, Category, Good
 from catalog.serializers import BrandSerializer, CategorySerializer, GoodSerializer
 
 
+def _public_read_methods():
+    return ('GET', 'HEAD', 'OPTIONS', None)
+
+
 @extend_schema_view(
     list=extend_schema(tags=['Category'], summary='لیست دسته‌بندی‌ها'),
     retrieve=extend_schema(tags=['Category'], summary='جزئیات دسته‌بندی'),
@@ -24,13 +28,13 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         method = getattr(self.request, 'method', None)
-        if method in ('GET', 'HEAD', 'OPTIONS', None):
+        if method in _public_read_methods():
             return [AllowAny()]
         return [IsAuthenticated(), IsOwnerOrAdmin()]
 
     def get_authenticators(self):
         method = getattr(self.request, 'method', None)
-        if method in ('GET', 'HEAD', 'OPTIONS', None):
+        if method in _public_read_methods():
             return []
         return super().get_authenticators()
 
@@ -52,8 +56,26 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.filter(deleted_at__isnull=True).select_related('category')
     serializer_class = BrandSerializer
-    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
+
+    def get_permissions(self):
+        method = getattr(self.request, 'method', None)
+        if method in _public_read_methods():
+            return [AllowAny()]
+        return [IsAuthenticated(), IsOwnerOrAdmin()]
+
+    def get_authenticators(self):
+        method = getattr(self.request, 'method', None)
+        if method in _public_read_methods():
+            return []
+        return super().get_authenticators()
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        category_id = self.request.query_params.get('categoryId')
+        if category_id:
+            qs = qs.filter(category_id=category_id)
+        return qs.order_by('name')
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -78,9 +100,17 @@ class GoodViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         method = getattr(self.request, 'method', None)
+        if method in _public_read_methods():
+            return [AllowAny()]
         if method == 'POST':
             return [IsAuthenticated(), IsOwnerOrAdmin()]
         return [IsAuthenticated()]
+
+    def get_authenticators(self):
+        method = getattr(self.request, 'method', None)
+        if method in _public_read_methods():
+            return []
+        return super().get_authenticators()
 
     def get_queryset(self):
         qs = super().get_queryset()

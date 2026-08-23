@@ -305,6 +305,7 @@ GET /api/category/?filter.title=$ilike:لبنیات
       "id": "a1b2c3d4-....",
       "title": "لبنیات",
       "description": "شیر، ماست، پنیر",
+      "image": "http://127.0.0.1:8000/media/categories/dairy.jpg",
       "createdAt": "2026-08-15T10:00:00+03:30",
       "updatedAt": "2026-08-15T10:00:00+03:30"
     }
@@ -509,37 +510,59 @@ index.html
 |-----|-----|--------|
 | Login / OTP | Auth | ✅ وصل |
 | پروفایل | Users | ✅ وصل |
-| دسته‌بندی | Category | ❌ static HTML |
-| محصولات | Good | ❌ static HTML |
-| عکس محصول | — | ❌ static در `assets/img/` |
+| دسته‌بندی | Category | ✅ `CategoriesPage.html` |
+| محصولات | Good | ✅ `CategoriesPage.html` (فیلتر category/brand) |
+| عکس محصول/دسته | Admin + `/media/` | ✅ آپلود در Admin، URL کامل در API |
 | سبد خرید | — | ❌ API ندارد |
 
 ---
 
-### ۷.۲ عکس محصولات
+### ۷.۲ عکس دسته‌بندی و محصول
 
-**الان:** عکس‌ها static در `frontend/src/SnappMarket/assets/img/` (1.webp تا 73.webp)
+**از پنل Admin:** در فرم Category یا Good فیلد **Image** را پر کن. فایل در `backend-django/media/` ذخیره می‌شود.
 
-```html
-<!-- فعلی — hardcode در HTML -->
-<img src="assets/img/25.webp" />
+**در API:** فیلد `image` URL کامل برمی‌گرداند:
+
+```json
+{
+  "id": "...",
+  "title": "لبنیات",
+  "description": "شیر و ماست",
+  "image": "http://127.0.0.1:8000/media/categories/dairy.jpg"
+}
 ```
 
-**راه‌حل موقت تا اضافه شدن image به API:**
+اگر عکس آپلود نشده باشد `image: null` است و فرانت از placeholder استفاده می‌کند.
 
-```javascript
-export const getProductImage = (product, index = 0) => {
-  const imgNum = (index % 73) + 1;
-  return `assets/img/${imgNum}.webp`;
-};
+---
+
+### ۷.۳ صفحه CategoriesPage (پیاده‌سازی شده)
+
+**فایل‌ها:**
+- `frontend/src/SnappMarket/CategoriesPage.html`
+- `frontend/src/SnappMarket/assets/js/modules/catalog/api.js`
+- `frontend/src/SnappMarket/assets/js/modules/catalog/categoriesPage.js`
+
+**جریان کار:**
+1. اسلایدر بالا → `GET /api/category/` (عنوان + عکس)
+2. فیلتر برند → `GET /api/brand/?categoryId=...`
+3. کارت محصول → `GET /api/good/?categoryId=...&brandId=...&isAvailable=true`
+4. کلیک دسته → `CategoriesPage.html?category=<uuid>`
+
+**تست:**
+```
+Backend: python manage.py runserver 8000
+Frontend: Live Server روی SnappMarket/
+URL: http://127.0.0.1:5501/frontend/src/SnappMarket/CategoriesPage.html
+Admin: http://127.0.0.1:8000/admin → Category / Brand / Good + Image
 ```
 
 ---
 
-### ۷.۳ اتصال دسته‌بندی — `category.js`
+### ۷.۴ اتصال دسته‌بندی — `api.js`
 
 ```javascript
-// frontend/src/SnappMarket/assets/js/modules/utils/category/category.js
+// frontend/src/SnappMarket/assets/js/modules/catalog/api.js
 import { baseURL } from "../../config.js";
 
 export const getCategories = async (page = 1, limit = 50) => {
@@ -565,19 +588,16 @@ export const renderCategories = async (selector) => {
 
 ---
 
-### ۷.۴ اتصال محصولات — `products.js`
+### ۷.۵ اتصال محصولات — `api.js`
 
 ```javascript
 import { baseURL } from "../../config.js";
-import { fetchApi } from "../utils/utils.js";
 
-export const getProducts = async (page = 1, limit = 20) => {
-  const res = await fetchApi(`${baseURL}/good/?page=${page}&limit=${limit}`);
-  return res.json();
-};
-
-export const getProductsByCategory = async (categoryId) => {
-  const res = await fetchApi(`${baseURL}/good/?categoryId=${categoryId}`);
+export const getProducts = async ({ categoryId, brandId, page = 1, limit = 20 } = {}) => {
+  const params = new URLSearchParams({ page, limit, isAvailable: "true" });
+  if (categoryId) params.set("categoryId", categoryId);
+  if (brandId) params.set("brandId", brandId);
+  const res = await fetch(`${baseURL}/good/?${params}`);
   return res.json();
 };
 
@@ -591,7 +611,7 @@ export const getFinalPrice = (p) =>
 
 ---
 
-### ۷.۵ Render در homepage
+### ۷.۶ Render در homepage (اختیاری)
 
 ```javascript
 import { getProducts, getFinalPrice, formatPrice } from "./products.js";
@@ -610,7 +630,7 @@ export const loadProducts = async (selector) => {
 
 ---
 
-### ۷.۶ چک‌لیست فرانت دولوپر
+### ۷.۷ چک‌لیست فرانت دولوپر
 
 ```
 □ Backend روی :8000 اجرا شود
@@ -618,8 +638,10 @@ export const loadProducts = async (selector) => {
 □ Auth flow تست شود
 □ از Admin: Category + Good اضافه شود
 □ GET /category/ بدون login کار کند
-□ GET /good/ با login (cookie) کار کند
-□ fetchApi + credentials:"include" استفاده شود
+□ GET /good/ بدون login کار کند (Public)
+□ GET /brand/?categoryId= بدون login کار کند
+□ از Admin برای Category/Good عکس آپلود شود
+□ CategoriesPage.html داده را از API بگیرد
 □ Swagger تست شود: /docs
 ```
 

@@ -16,6 +16,7 @@ class BaseModel(models.Model):
 class Category(BaseModel):
     title = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
 
     class Meta:
         db_table = 'categories'
@@ -62,6 +63,7 @@ class Good(BaseModel):
     is_featured = models.BooleanField(default=False)
     is_healthy = models.BooleanField(default=False)
     unit = models.CharField(max_length=50, blank=True, null=True)
+    image = models.ImageField(upload_to='goods/', blank=True, null=True)
     brand = models.ForeignKey(
         Brand,
         on_delete=models.RESTRICT,

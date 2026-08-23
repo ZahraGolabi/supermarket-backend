@@ -161,3 +161,28 @@
   margin-top: 5rem;
 }
 /* finish footer  */
+
+.categories-page__loading,
+.categories-page__empty,
+.categories-page__error {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #686c79;
+  font-size: 0.95rem;
+}
+
+.categories-page__error {
+  color: #d14343;
+}
+
+.category-filter__item {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.category-slider__item--active .category-slider__label {
+  color: #ff600a;
+  font-weight: 700;
+}

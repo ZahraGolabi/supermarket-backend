@@ -98,6 +98,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -159,6 +162,8 @@ OWNER_PHONE = os.getenv('OWNER_PHONE', '09111111111')
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5500',
     'http://127.0.0.1:5500',
+    'http://localhost:5501',
+    'http://127.0.0.1:5501',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://localhost:3000',

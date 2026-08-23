@@ -3,14 +3,26 @@ from rest_framework import serializers
 from catalog.models import Brand, Category, Good
 
 
+def build_media_url(request, file_field):
+    if file_field and hasattr(file_field, 'url'):
+        if request:
+            return request.build_absolute_uri(file_field.url)
+        return file_field.url
+    return None
+
+
 class CategorySerializer(serializers.ModelSerializer):
     createdAt = serializers.DateTimeField(source='created_at', read_only=True)
     updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ['id', 'title', 'description', 'createdAt', 'updatedAt']
+        fields = ['id', 'title', 'description', 'image', 'createdAt', 'updatedAt']
         read_only_fields = ['id', 'createdAt', 'updatedAt']
+
+    def get_image(self, obj):
+        return build_media_url(self.context.get('request'), obj.image)
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -41,16 +53,20 @@ class GoodSerializer(serializers.ModelSerializer):
     isHealthy = serializers.BooleanField(source='is_healthy', required=False, default=False)
     createdAt = serializers.DateTimeField(source='created_at', read_only=True)
     updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Good
         fields = [
             'id', 'title', 'slug', 'description', 'weightVolume', 'ingredients',
             'barcode', 'price', 'discountPercent', 'stockQuantity', 'isAvailable',
-            'isFeatured', 'isHealthy', 'unit', 'brandId', 'categoryId',
+            'isFeatured', 'isHealthy', 'unit', 'brandId', 'categoryId', 'image',
             'createdAt', 'updatedAt',
         ]
         read_only_fields = ['id', 'createdAt', 'updatedAt']
+
+    def get_image(self, obj):
+        return build_media_url(self.context.get('request'), obj.image)
 
     def validate_discountPercent(self, value):
         if value < 0 or value > 100:
