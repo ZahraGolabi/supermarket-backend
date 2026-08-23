@@ -1,3 +1,6 @@
+import { getAndShowcategorys } from "./modules/category/category.js";
+
+
 const btn = document.querySelector(".back-to-top__btn");
 const stopSection = document.querySelector(".back-to-top");
 const detailProductClose = document.querySelector(".detail-product__close");
@@ -41,14 +44,7 @@ const loginDrooDownHandler = () => {
   loginBody.classList.toggle("show-panel");
 };
 
-bannerProduct.forEach((item) => {
-  item.addEventListener("click", openDetail);
-});
-
-
-detailProductClose.addEventListener("click", closeDetail); 
-
-
+ 
 const setupLoginDropdown = () => {
   const loginBtn = document.querySelector("#login");
   const loginBody = document.querySelector(".login__body");
@@ -77,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (headerLocation) headerLocation.style.display = '';
         }
     });
+    getAndShowcategorys()
 });
 
 
@@ -85,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
+bannerProduct.forEach((item) => {
+  item.addEventListener("click", openDetail);
+});
+detailProductClose.addEventListener("click", closeDetail);
 export { setupLoginDropdown };
