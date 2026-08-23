@@ -510,8 +510,8 @@ index.html
 |-----|-----|--------|
 | Login / OTP | Auth | ✅ وصل |
 | پروفایل | Users | ✅ وصل |
-| دسته‌بندی | Category | ✅ `CategoriesPage.html` |
-| محصولات | Good | ✅ `CategoriesPage.html` (فیلتر category/brand) |
+| دسته‌بندی | Category | ❌ API آماده — اتصال با تیم فرانت |
+| محصولات | Good | ❌ API آماده — اتصال با تیم فرانت |
 | عکس محصول/دسته | Admin + `/media/` | ✅ آپلود در Admin، URL کامل در API |
 | سبد خرید | — | ❌ API ندارد |
 
@@ -532,38 +532,62 @@ index.html
 }
 ```
 
-اگر عکس آپلود نشده باشد `image: null` است و فرانت از placeholder استفاده می‌کند.
+اگر عکس آپلود نشده باشد `image: null` است.
 
 ---
 
-### ۷.۳ صفحه CategoriesPage (پیاده‌سازی شده)
+### ۷.۳ راهنمای اتصال برای تیم فرانت (CategoriesPage)
 
-**فایل‌ها:**
-- `frontend/src/SnappMarket/CategoriesPage.html`
-- `frontend/src/SnappMarket/assets/js/modules/catalog/api.js`
-- `frontend/src/SnappMarket/assets/js/modules/catalog/categoriesPage.js`
+**Endpointها (همه Public برای GET):**
 
-**جریان کار:**
-1. اسلایدر بالا → `GET /api/category/` (عنوان + عکس)
-2. فیلتر برند → `GET /api/brand/?categoryId=...`
-3. کارت محصول → `GET /api/good/?categoryId=...&brandId=...&isAvailable=true`
-4. کلیک دسته → `CategoriesPage.html?category=<uuid>`
+| بخش UI | API |
+|--------|-----|
+| اسلایدر دسته‌ها | `GET /api/category/?limit=50` |
+| فیلتر برند | `GET /api/brand/?categoryId={uuid}` |
+| لیست محصول | `GET /api/good/?categoryId={uuid}&brandId={uuid}&isAvailable=true` |
 
-**تست:**
+**Query params محصول:**
+- `categoryId` — فیلتر دسته
+- `brandId` — فیلتر برند (اختیاری)
+- `isAvailable=true` — فقط موجود
+- `page`, `limit` — صفحه‌بندی
+
+**نمونه پاسخ دسته:**
+```json
+{
+  "data": [{
+    "id": "uuid",
+    "title": "لبنیات",
+    "description": "شیر و ماست",
+    "image": "http://127.0.0.1:8000/media/categories/dairy.jpg"
+  }]
+}
 ```
-Backend: python manage.py runserver 8000
-Frontend: Live Server روی SnappMarket/
-URL: http://127.0.0.1:5501/frontend/src/SnappMarket/CategoriesPage.html
-Admin: http://127.0.0.1:8000/admin → Category / Brand / Good + Image
+
+**نمونه پاسخ محصول:**
+```json
+{
+  "data": [{
+    "id": "uuid",
+    "title": "ماست",
+    "price": 45000,
+    "discountPercent": 10,
+    "image": "http://127.0.0.1:8000/media/goods/yogurt.jpg",
+    "categoryId": "uuid",
+    "brandId": "uuid"
+  }]
+}
 ```
+
+**Admin:** http://127.0.0.1:8000/admin — Category / Brand / Good + Image
 
 ---
 
-### ۷.۴ اتصال دسته‌بندی — `api.js`
+### ۷.۴ نمونه کد فرانت (اختیاری — توسط تیم فرانت)
 
 ```javascript
-// frontend/src/SnappMarket/assets/js/modules/catalog/api.js
-import { baseURL } from "../../config.js";
+// نمونه — در پروژه فرانت پیاده‌سازی شود
+import { baseURL } from "./config.js";
 
 export const getCategories = async (page = 1, limit = 50) => {
   const res = await fetch(`${baseURL}/category/?page=${page}&limit=${limit}`);
@@ -641,7 +665,6 @@ export const loadProducts = async (selector) => {
 □ GET /good/ بدون login کار کند (Public)
 □ GET /brand/?categoryId= بدون login کار کند
 □ از Admin برای Category/Good عکس آپلود شود
-□ CategoriesPage.html داده را از API بگیرد
 □ Swagger تست شود: /docs
 ```
 
