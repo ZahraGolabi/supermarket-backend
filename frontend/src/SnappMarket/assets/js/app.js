@@ -1,4 +1,4 @@
-import { getAndShowcategorys } from "./modules/category/category.js";
+import { getAndShowcategorys,renderDentBanner } from "./modules/category/category.js";
 
 
 const btn = document.querySelector(".back-to-top__btn");
@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     getAndShowcategorys()
+    renderDentBanner()
 });
 
 

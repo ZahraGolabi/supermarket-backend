@@ -17,9 +17,9 @@
 
 .banner-product__discount {
   position: absolute;
-  left: 10px;
-  top: 9px;
-  padding: 4px;
+  left: 8px;
+  top: 7px;
+  padding: 4px 8px;
   border-radius: 0 0 10px 0;
   background-color: var(--clr-primary);
   color: var(--clr-white);
@@ -208,7 +208,7 @@
   padding: 0 3px 0 3px;
 }
 .section-register-title {
-  font-size: 0.70rem;
+  font-size: 0.7rem;
   padding: 0.75rem 0.5rem 0 0;
   width: 130px;
   overflow: hidden;
@@ -222,6 +222,6 @@
   height: 40px;
   max-height: none;
   white-space: normal;
-  line-height:1.75;
+  line-height: 1.75;
 }
 /*   \3c !-- finish Section 9: Fresher than Fresh  --> */

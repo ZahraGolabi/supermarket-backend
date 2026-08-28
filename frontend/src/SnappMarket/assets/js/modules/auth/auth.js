@@ -28,7 +28,7 @@ const register = async () => {
     });
     const data = await response.json();
     if (response.ok) {
-      await showSwal("کد تایید", "44444", "info", "متوجه شدم");
+      await showSwal("کد تایید",data.otp, "info", "متوجه شدم");
       saveToLocalStorage("user", { phone: phoneInput.value });
       window.location.href = "passwordLogin.html";
     }
