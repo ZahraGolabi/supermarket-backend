@@ -35,13 +35,14 @@ const getAndShowcategorys = async () => {
 
 const renderDentBanner = async () => {
   const denetBanerElem = document.querySelector(".denet-baner");
-  const res = await fetch(`http://localhost:8000/api/good`);
+  const res = await fetch(`http://localhost:8000/api/good/?limit=50&page=1`);
   const products = await res.json();
   const danetProduct = products.data
     .filter(
       (product) => product.brandId == "a086c69a-c7df-423c-aafa-bc62626c3746",
     )
     .slice(products.length - 8);
+  
   tamplateProduct( danetProduct,denetBanerElem)
 };
 
@@ -56,6 +57,21 @@ const renderIceCreame = async () => {
     .slice(products.length - 8);
     tamplateProduct(iceCremeProduct,iceCreamElem)
 };
+
+const renderFresherProduct=async()=>{
+    const  fresherProductElem = document.querySelector(".fresher-than");
+  const res = await fetch(`http://localhost:8000/api/good`);
+  const products = await res.json();
+  const fresherProduct = products.data
+    .filter(
+      (product) => product.brandId == "3480251e-ef7f-4e80-a43b-7edf379c0de6" || product.brandId === "648ccbe3-071d-4379-85d2-5e0c2f504da9",
+    )
+    .slice(products.length - 8);
+    tamplateProduct(fresherProduct,fresherProductElem)
+
+}
+
+
 
 const tamplateProduct = (products,container) => {
   products.forEach((product) => {
@@ -97,4 +113,7 @@ const tamplateProduct = (products,container) => {
   });
 };
 
-export { getAndShowcategorys, renderDentBanner, renderIceCreame };
+
+
+
+export { getAndShowcategorys, renderDentBanner, renderIceCreame,renderFresherProduct};
