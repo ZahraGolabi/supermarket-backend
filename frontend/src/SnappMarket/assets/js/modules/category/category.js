@@ -42,8 +42,7 @@ const renderDentBanner = async () => {
       (product) => product.brandId == "a086c69a-c7df-423c-aafa-bc62626c3746",
     )
     .slice(products.length - 8);
-  
-  tamplateProduct( danetProduct,denetBanerElem)
+  tamplateProduct(danetProduct, denetBanerElem);
 };
 
 const renderIceCreame = async () => {
@@ -55,25 +54,24 @@ const renderIceCreame = async () => {
       (product) => product.brandId == "b71a15de-2567-46ec-a896-659407f6eec1",
     )
     .slice(products.length - 8);
-    tamplateProduct(iceCremeProduct,iceCreamElem)
+  tamplateProduct(iceCremeProduct, iceCreamElem);
 };
 
-const renderFresherProduct=async()=>{
-    const  fresherProductElem = document.querySelector(".fresher-than");
+const renderFresherProduct = async () => {
+  const fresherProductElem = document.querySelector(".fresher-than");
   const res = await fetch(`http://localhost:8000/api/good`);
   const products = await res.json();
   const fresherProduct = products.data
     .filter(
-      (product) => product.brandId == "3480251e-ef7f-4e80-a43b-7edf379c0de6" || product.brandId === "648ccbe3-071d-4379-85d2-5e0c2f504da9",
+      (product) =>
+        product.brandId == "3480251e-ef7f-4e80-a43b-7edf379c0de6" ||
+        product.brandId === "648ccbe3-071d-4379-85d2-5e0c2f504da9",
     )
     .slice(products.length - 8);
-    tamplateProduct(fresherProduct,fresherProductElem)
+  tamplateProduct(fresherProduct, fresherProductElem);
+};
 
-}
-
-
-
-const tamplateProduct = (products,container) => {
+const tamplateProduct = (products, container) => {
   products.forEach((product) => {
     container.insertAdjacentHTML(
       "beforeend",
@@ -82,7 +80,12 @@ const tamplateProduct = (products,container) => {
                     class="banner-product__info swiper-slide register-section-product"
                   >
                     <div class="banner-product__image-wapper">
-                      <span class="banner-product__discount">${product.discountPercent ? product.discountPercent : ""}%</span>
+                    ${
+                      product.discountPercent
+                        ? `<span class="banner-product__discount">${product.discountPercent}%</span>`
+                        : ""
+                    }
+                      
                       <span class="banner-product__favorite">
                         <svg class="banner-product__icon--favorite">
                           <use href="#like-icon"></use>
@@ -113,7 +116,9 @@ const tamplateProduct = (products,container) => {
   });
 };
 
-
-
-
-export { getAndShowcategorys, renderDentBanner, renderIceCreame,renderFresherProduct};
+export {
+  getAndShowcategorys,
+  renderDentBanner,
+  renderIceCreame,
+  renderFresherProduct,
+};
