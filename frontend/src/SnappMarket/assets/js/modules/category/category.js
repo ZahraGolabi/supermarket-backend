@@ -33,13 +33,19 @@ const getAndShowcategorys = async () => {
   return categories;
 };
 
-
-const renderDentBanner=async()=>{
-  const denetBanerElem=document.querySelector(".denet-baner");
-  const res = await fetch(`http://localhost:8000/api/good?limit=8&page=1`);
-  const products = await res.json()
-  products.data.forEach((product)=>{
-    denetBanerElem.insertAdjacentHTML("beforeend",`
+const renderDentBanner = async () => {
+  const denetBanerElem = document.querySelector(".denet-baner");
+  const res = await fetch(`http://localhost:8000/api/good`);
+  const products = await res.json();
+  const danetProduct = products.data
+    .filter(
+      (product) => product.brandId == "a086c69a-c7df-423c-aafa-bc62626c3746",
+    )
+    .slice(products.length - 8);
+  danetProduct.forEach((product) => {
+    denetBanerElem.insertAdjacentHTML(
+      "beforeend",
+      `
          <div
              class="banner-product__info swiper-slide register-section-product"
            >
@@ -66,13 +72,14 @@ const renderDentBanner=async()=>{
              <span class="banner-product__price-current"
              >${product.price} تومان</span
              >
-             <del class="banner-product__price-old">69,000</del>
-       </div>
-      `)
-  })
+             
+             <del class="banner-product__price-old">
+            ${product.discountPercent ? Math.round(product.price / (1 - product.discountPercent / 100)).toLocaleString() + " تومان" : ""}
+            </del> 
+     </div>
+      `,
+    );
+  });
+};
 
-
-
-}
-
-export { getAndShowcategorys,renderDentBanner };
+export { getAndShowcategorys, renderDentBanner };
