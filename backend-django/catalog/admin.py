@@ -20,10 +20,20 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'created_at')
+    list_display = ('name', 'category', 'image_preview', 'created_at')
     list_filter = ('category',)
     search_fields = ('name',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'deleted_at')
+    readonly_fields = ('id', 'created_at', 'updated_at', 'deleted_at', 'image_preview')
+    fields = (
+        'name', 'description', 'image', 'image_preview',
+        'category', 'id', 'created_at', 'updated_at', 'deleted_at',
+    )
+
+    @admin.display(description='پیش‌نمایش')
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height:80px;border-radius:8px;" />', obj.image.url)
+        return '—'
 
 
 @admin.register(Good)

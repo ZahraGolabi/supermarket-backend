@@ -406,18 +406,45 @@ GET /api/category/a1b2c3d4-e89b-12d3-a456-426614174000/
 
 | Method | Path | Auth |
 |--------|------|------|
-| GET | `/brand/` | ✅ |
-| GET | `/brand/{id}/` | ✅ |
-| POST | `/brand/` | ✅ |
-| PUT/PATCH | `/brand/{id}/` | ✅ |
-| DELETE | `/brand/{id}/` | ✅ |
+| GET | `/brand/` | ❌ Public |
+| GET | `/brand/{id}/` | ❌ Public |
+| POST | `/brand/` | ✅ owner/admin |
+| PUT/PATCH | `/brand/{id}/` | ✅ owner/admin |
+| DELETE | `/brand/{id}/` | ✅ owner/admin |
 
-**POST body:**
+**Query params (GET list):**
+
+| Param | توضیح |
+|-------|-------|
+| `categoryId` | فیلتر برندهای یک دسته |
+
+**POST body (JSON — بدون عکس):**
 ```json
 {
   "name": "کاله",
   "description": "برند لبنیات",
   "categoryId": "uuid-of-category"
+}
+```
+
+**POST با عکس (multipart/form-data — image اختیاری):**
+```
+name=کاله
+description=برند لبنیات
+categoryId=uuid-of-category
+image=<file>   ← اختیاری
+```
+
+**Response نمونه:**
+```json
+{
+  "id": "uuid",
+  "name": "کاله",
+  "description": "برند لبنیات",
+  "image": null,
+  "categoryId": "uuid-of-category",
+  "createdAt": "...",
+  "updatedAt": "..."
 }
 ```
 
@@ -517,22 +544,31 @@ index.html
 
 ---
 
-### ۷.۲ عکس دسته‌بندی و محصول
+### ۷.۲ عکس دسته‌بندی، برند و محصول (اختیاری)
 
-**از پنل Admin:** در فرم Category یا Good فیلد **Image** را پر کن. فایل در `backend-django/media/` ذخیره می‌شود.
+**همه فیلدهای `image` اختیاری هستند** — می‌توانی بدون عکس هم Category / Brand / Good بسازی.
 
-**در API:** فیلد `image` URL کامل برمی‌گرداند:
+**از پنل Admin:** در فرم Category، Brand یا Good فیلد **Image** را در صورت نیاز پر کن. فایل در `backend-django/media/` ذخیره می‌شود.
+
+| مدل | مسیر آپلود |
+|-----|-----------|
+| Category | `media/categories/` |
+| Brand | `media/brands/` |
+| Good | `media/goods/` |
+
+**در API:** فیلد `image` URL کامل برمی‌گرداند یا `null` اگر عکس نباشد:
 
 ```json
 {
   "id": "...",
-  "title": "لبنیات",
-  "description": "شیر و ماست",
-  "image": "http://127.0.0.1:8000/media/categories/dairy.jpg"
+  "name": "کاله",
+  "description": "برند لبنیات",
+  "image": "http://127.0.0.1:8000/media/brands/kalle.jpg",
+  "categoryId": "..."
 }
 ```
 
-اگر عکس آپلود نشده باشد `image: null` است.
+**آپلود از API (multipart/form-data):** فیلد `image` اختیاری است؛ JSON-only بدون `image` هم قبول می‌شود.
 
 ---
 

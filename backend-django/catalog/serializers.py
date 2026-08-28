@@ -11,21 +11,30 @@ def build_media_url(request, file_field):
     return None
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class OptionalImageMixin:
+    """Optional image: null in response when empty; writable via multipart on create/update."""
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if 'image' in self.fields:
+            data['image'] = build_media_url(self.context.get('request'), instance.image)
+        return data
+
+
+class CategorySerializer(OptionalImageMixin, serializers.ModelSerializer):
     createdAt = serializers.DateTimeField(source='created_at', read_only=True)
     updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
-    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
         fields = ['id', 'title', 'description', 'image', 'createdAt', 'updatedAt']
         read_only_fields = ['id', 'createdAt', 'updatedAt']
+        extra_kwargs = {
+            'image': {'required': False, 'allow_null': True},
+        }
 
-    def get_image(self, obj):
-        return build_media_url(self.context.get('request'), obj.image)
 
-
-class BrandSerializer(serializers.ModelSerializer):
+class BrandSerializer(OptionalImageMixin, serializers.ModelSerializer):
     categoryId = serializers.PrimaryKeyRelatedField(
         source='category', queryset=Category.objects.all()
     )
@@ -34,11 +43,14 @@ class BrandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Brand
-        fields = ['id', 'name', 'description', 'categoryId', 'createdAt', 'updatedAt']
+        fields = ['id', 'name', 'description', 'image', 'categoryId', 'createdAt', 'updatedAt']
         read_only_fields = ['id', 'createdAt', 'updatedAt']
+        extra_kwargs = {
+            'image': {'required': False, 'allow_null': True},
+        }
 
 
-class GoodSerializer(serializers.ModelSerializer):
+class GoodSerializer(OptionalImageMixin, serializers.ModelSerializer):
     brandId = serializers.PrimaryKeyRelatedField(
         source='brand', queryset=Brand.objects.all(), required=False, allow_null=True
     )
@@ -53,7 +65,6 @@ class GoodSerializer(serializers.ModelSerializer):
     isHealthy = serializers.BooleanField(source='is_healthy', required=False, default=False)
     createdAt = serializers.DateTimeField(source='created_at', read_only=True)
     updatedAt = serializers.DateTimeField(source='updated_at', read_only=True)
-    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Good
@@ -64,9 +75,9 @@ class GoodSerializer(serializers.ModelSerializer):
             'createdAt', 'updatedAt',
         ]
         read_only_fields = ['id', 'createdAt', 'updatedAt']
-
-    def get_image(self, obj):
-        return build_media_url(self.context.get('request'), obj.image)
+        extra_kwargs = {
+            'image': {'required': False, 'allow_null': True},
+        }
 
     def validate_discountPercent(self, value):
         if value < 0 or value > 100:

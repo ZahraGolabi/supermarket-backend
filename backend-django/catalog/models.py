@@ -30,6 +30,7 @@ class Category(BaseModel):
 class Brand(BaseModel):
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=255, blank=True, null=True)
+    image = models.ImageField(upload_to='brands/', blank=True, null=True)
     category = models.ForeignKey(
         Category,
         on_delete=models.RESTRICT,
