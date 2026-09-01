@@ -1,4 +1,5 @@
-import { getAndShowcategorys,renderDentBanner,renderIceCreame,renderFresherProduct} from "./modules/category/category.js";
+import { getAndShowcategorys} from "./modules/category/category.js";
+import { renderDentBanner,renderIceCreame,renderFresherProduct} from "./modules/product/product.js";
 
 
 const btn = document.querySelector(".back-to-top__btn");
