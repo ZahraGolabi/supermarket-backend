@@ -1,6 +1,11 @@
-import { getAndShowcategorys} from "./modules/category/category.js";
-import { renderDentBanner,renderIceCreame,renderFresherProduct} from "./modules/product/product.js";
-
+import { getAndShowcategorys } from "./modules/category/category.js";
+import {
+  renderDentBanner,
+  renderIceCreame,
+  renderFresherProduct,
+  prepareQuickly,
+  renderBrandBanner
+} from "./modules/product/product.js";
 
 const btn = document.querySelector(".back-to-top__btn");
 const stopSection = document.querySelector(".back-to-top");
@@ -40,12 +45,10 @@ const toggleOverlay = (status) => {
 const openDetail = () => toggleOverlay(true);
 const closeDetail = () => toggleOverlay(false);
 
-
 const loginDrooDownHandler = () => {
   loginBody.classList.toggle("show-panel");
 };
 
- 
 const setupLoginDropdown = () => {
   const loginBtn = document.querySelector("#login");
   const loginBody = document.querySelector(".login__body");
@@ -57,34 +60,29 @@ const setupLoginDropdown = () => {
   });
 };
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const loginWrapper = document.querySelector('.login-wrapper');
-    const headerLocation = document.querySelector('.header-location');
-        function hideInMobile() {
-        if (window.innerWidth <= 768) {
-            if (loginWrapper) loginWrapper.style.display = 'none';
-            if (headerLocation) headerLocation.style.display = 'none';
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  const loginWrapper = document.querySelector(".login-wrapper");
+  const headerLocation = document.querySelector(".header-location");
+  function hideInMobile() {
+    if (window.innerWidth <= 768) {
+      if (loginWrapper) loginWrapper.style.display = "none";
+      if (headerLocation) headerLocation.style.display = "none";
     }
-        window.addEventListener('scroll', hideInMobile);
-        window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            if (loginWrapper) loginWrapper.style.display = '';
-            if (headerLocation) headerLocation.style.display = '';
-        }
-    });
-    getAndShowcategorys()
-    renderDentBanner()
-    renderIceCreame()
-    renderFresherProduct()
+  }
+  window.addEventListener("scroll", hideInMobile);
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      if (loginWrapper) loginWrapper.style.display = "";
+      if (headerLocation) headerLocation.style.display = "";
+    }
+  });
+  getAndShowcategorys();
+  renderDentBanner();
+  renderIceCreame();
+  renderFresherProduct();
+  prepareQuickly();
+  renderBrandBanner();
 });
-
-
-
-
-
-
 
 bannerProduct.forEach((item) => {
   item.addEventListener("click", openDetail);

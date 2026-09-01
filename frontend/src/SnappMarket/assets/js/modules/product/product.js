@@ -12,11 +12,11 @@ const renderDentBanner = async () => {
 
 const renderIceCreame = async () => {
   const iceCreamElem = document.querySelector(".ice-cream-banner");
-  const res = await fetch(`http://localhost:8000/api/good`);
+  const res = await fetch(`http://localhost:8000/api/good/?limit=50&page=1`);
   const products = await res.json();
   const iceCremeProduct = products.data
     .filter(
-      (product) => product.brandId == "b71a15de-2567-46ec-a896-659407f6eec1",
+      (product) => product.brandId === "b71a15de-2567-46ec-a896-659407f6eec1",
     )
     .slice(products.length - 8);
   tamplateProduct(iceCremeProduct, iceCreamElem);
@@ -35,6 +35,52 @@ const renderFresherProduct = async () => {
     .slice(products.length - 8);
   tamplateProduct(fresherProduct, fresherProductElem);
 };
+
+const prepareQuickly = async () => {
+  const bannerWrapper = document.querySelector(".banner-product__quickly");
+  const res = await fetch(`http://localhost:8000/api/good/`);
+  const products = await res.json();
+
+  const mainProduct = products.data
+    .filter(
+      (product) =>
+        product.categoryId == "7444840d-ac98-4c99-893b-22876d0b7b10" ||
+        product.categoryId == "9c79df77-20dd-4e0c-8733-9e10074f57a6",
+    )
+    .splice(products.length - 8);
+
+  tamplateProduct(mainProduct, bannerWrapper);
+};
+
+const renderBrandBanner = async () => {
+  const productWrapper = document.querySelector(".brande-wrapper");
+  const res = await fetch(`http://127.0.0.1:8000/api/brand/?limit=50&page=1`);
+  const products = await res.json();
+  const drinkBrannd = products.data
+    .filter(
+      (product) => product.categoryId == "04789251-b3ca-4f35-ab5c-fda0acf888a5",
+    )
+    .slice(products.length - 5);
+  drinkBrannd.forEach((brand) => {
+    productWrapper.insertAdjacentHTML(
+      "beforeend",
+      `
+               <div class="category-slider__item swiper-slide">
+                <a href="">
+                  <div class="category-slider__media">
+                    <img
+                      class="category-slider__image"
+                      src=${brand.image}
+                      alt="محصول1"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span class="category-slider__label ellipsis">${brand.name}</span>
+                </a>
+              </div>
+        `,
+    );
+  })};
 
 const tamplateProduct = (products, container) => {
   products.forEach((product) => {
@@ -81,10 +127,10 @@ const tamplateProduct = (products, container) => {
   });
 };
 
-
-
 export {
   renderDentBanner,
   renderIceCreame,
   renderFresherProduct,
+  prepareQuickly,
+  renderBrandBanner,
 };
