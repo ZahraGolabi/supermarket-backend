@@ -500,6 +500,10 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* start style footer  */
+
+/* finish style footer  */
 /* start deails product styles */
 .overlay {
   position: fixed;
@@ -720,6 +724,3 @@
   transition: all 0.2s ease;
 }
 /* finish deails product styles */
-/* start style footer  */
-
-/* finish style footer  */

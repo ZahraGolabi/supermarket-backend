@@ -1,3 +1,5 @@
+
+
 const renderDentBanner = async () => {
   const denetBanerElem = document.querySelector(".denet-baner");
   const res = await fetch(`http://localhost:8000/api/good/?limit=50&page=1`);
@@ -82,6 +84,22 @@ const renderBrandBanner = async () => {
     );
   })};
 
+
+const goToDetail=async(productID)=>{
+  const res = await fetch(`http://localhost:8000/api/good/${productID}`);
+  const detailsProduct=await res.json()
+
+  if(res.status==200){
+  // document.body.classList.add("overlay-open");
+  }
+  console.log(res);
+  console.log(detailsProduct);
+  
+
+console.log(productID);
+
+}
+
 const tamplateProduct = (products, container) => {
   products.forEach((product) => {
     container.insertAdjacentHTML(
@@ -89,6 +107,7 @@ const tamplateProduct = (products, container) => {
       `
             <div
                     class="banner-product__info swiper-slide register-section-product"
+                    onclick=goToDetail('${product.id}')
                   >
                     <div class="banner-product__image-wapper">
                     ${
@@ -133,4 +152,5 @@ export {
   renderFresherProduct,
   prepareQuickly,
   renderBrandBanner,
+  goToDetail
 };

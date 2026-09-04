@@ -4,8 +4,11 @@ import {
   renderIceCreame,
   renderFresherProduct,
   prepareQuickly,
-  renderBrandBanner
+  renderBrandBanner,
+  goToDetail
 } from "./modules/product/product.js";
+
+window.goToDetail=goToDetail
 
 const btn = document.querySelector(".back-to-top__btn");
 const stopSection = document.querySelector(".back-to-top");
