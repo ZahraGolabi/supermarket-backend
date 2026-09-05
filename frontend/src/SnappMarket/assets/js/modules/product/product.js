@@ -90,7 +90,6 @@ const goToDetail = async (productID) => {
 
   const elements = getElements();
   fillProductData(elements, product);
-
   showModal(elements);
   elements.close.addEventListener(
     "click",
@@ -136,7 +135,6 @@ const calculateSaving = (oldPrice, price) => {
 };
 
 const fillProductData = (elements, product) => {
-  console.log(elements, product);
 
   const { image, stock, title, saving, priceCurrent, priceOld, discount } =
     elements;
