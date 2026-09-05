@@ -85,20 +85,59 @@ const renderBrandBanner = async () => {
   })};
 
 
-const goToDetail=async(productID)=>{
-  const res = await fetch(`http://localhost:8000/api/good/${productID}`);
-  const detailsProduct=await res.json()
+// const goToDetail=async(productID)=>{
+//   const res = await fetch(`http://localhost:8000/api/good/${productID}`);
+//   const detailsProduct=await res.json()
+//   const test=document.querySelector(".detail-product")
+//   const overlay=document.querySelector(".overlay")
 
-  if(res.status==200){
-  // document.body.classList.add("overlay-open");
-  }
-  console.log(res);
-  console.log(detailsProduct);
+
+
+// const detailProductImage=document.querySelector(".detail-product__image")
+// const detailProductStock=document.querySelector(".detail-product__stock")
+//   const detailProducTitle=document.querySelector(".detail-product__title")
+// const detailProductSaving=document.querySelector(".detail-product__saving")
+
+// const detailProductPriceCurrent=document.querySelector(".detail-product__price-current")
+// const detailProductPriceOld=document.querySelector(".detail-product__price-old")
+// const detailProductDiscountBadge=document.querySelector(".detail-product__discount-badge")
+
+
+
+//   if(res.status==200){
+//   test.classList.add("overlay--show");
+//   document.body.classList.add("overlay-open");
+//   overlay.classList.add("overlay--show");
+
+// detailProductImage.setAttribute("src",detailsProduct.image)
+// detailProductStock.innerHTML=`${detailsProduct.stockQuantity} عدد مانده !`
+// detailProducTitle.innerHTML=detailsProduct.title
+// detailProductSaving.innerHTML=`با خرید هر عدد ۲۶۲,۵۰۰ تومان صرفه جویی کنید!`
+// detailProductPriceCurrent.innerHTML=`${detailsProduct.price} تومان`
+// // detailProductPriceOld.innerHTML=""
+// detailProductDiscountBadge.innerHTML=`${detailsProduct.discountPercent} %`
+
+
+
+//   }
+
+
+
+  
+//   console.log(res);
+//   console.log(detailsProduct);
   
 
-console.log(productID);
+// console.log(productID);
 
-}
+// }
+
+
+
+
+
+
+
 
 const tamplateProduct = (products, container) => {
   products.forEach((product) => {
