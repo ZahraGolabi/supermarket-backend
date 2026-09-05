@@ -38,15 +38,15 @@ window.addEventListener("scroll", function () {
   }
 });
 
-const toggleOverlay = (status) => {
-  const action = status ? "add" : "remove";
-  overlay.classList[action]("overlay--show");
-  detailProduct.classList[action]("overlay--show");
-  document.body.classList[action]("overlay-open");
-};
+// const toggleOverlay = (status) => {
+//   const action = status ? "add" : "remove";
+//   overlay.classList[action]("overlay--show");
+//   detailProduct.classList[action]("overlay--show");
+//   document.body.classList[action]("overlay-open");
+// };
 
-const openDetail = () => toggleOverlay(true);
-const closeDetail = () => toggleOverlay(false);
+// const openDetail = () => toggleOverlay(true);
+// const closeDetail = () => toggleOverlay(false);
 
 const loginDrooDownHandler = () => {
   loginBody.classList.toggle("show-panel");
@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
   renderBrandBanner();
 });
 
-bannerProduct.forEach((item) => {
-  item.addEventListener("click", openDetail);
-});
-detailProductClose.addEventListener("click", closeDetail);
+// bannerProduct.forEach((item) => {
+//   item.addEventListener("click", openDetail);
+// });
+// detailProductClose.addEventListener("click", closeDetail);
 export { setupLoginDropdown };

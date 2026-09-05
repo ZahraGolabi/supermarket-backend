@@ -1,5 +1,3 @@
-
-
 const renderDentBanner = async () => {
   const denetBanerElem = document.querySelector(".denet-baner");
   const res = await fetch(`http://localhost:8000/api/good/?limit=50&page=1`);
@@ -82,16 +80,14 @@ const renderBrandBanner = async () => {
               </div>
         `,
     );
-  })};
-
+  });
+};
 
 // const goToDetail=async(productID)=>{
 //   const res = await fetch(`http://localhost:8000/api/good/${productID}`);
 //   const detailsProduct=await res.json()
 //   const test=document.querySelector(".detail-product")
 //   const overlay=document.querySelector(".overlay")
-
-
 
 // const detailProductImage=document.querySelector(".detail-product__image")
 // const detailProductStock=document.querySelector(".detail-product__stock")
@@ -101,8 +97,6 @@ const renderBrandBanner = async () => {
 // const detailProductPriceCurrent=document.querySelector(".detail-product__price-current")
 // const detailProductPriceOld=document.querySelector(".detail-product__price-old")
 // const detailProductDiscountBadge=document.querySelector(".detail-product__discount-badge")
-
-
 
 //   if(res.status==200){
 //   test.classList.add("overlay--show");
@@ -117,27 +111,91 @@ const renderBrandBanner = async () => {
 // // detailProductPriceOld.innerHTML=""
 // detailProductDiscountBadge.innerHTML=`${detailsProduct.discountPercent} %`
 
-
-
 //   }
 
-
-
-  
 //   console.log(res);
 //   console.log(detailsProduct);
-  
 
 // console.log(productID);
 
 // }
 
+const goToDetail = async (productID) => {
+  const res = await fetch(`http://localhost:8000/api/good/${productID}`);
+  const product = await res.json();
+  if (res.status !== 200) return;
 
+  const elements = getElements();
+  fillProductData(elements, product);
 
+  showModal(elements);
+  elements.close.addEventListener(
+    "click",
+    () => {
+      hideModal(elements)();
+    },
+    { once: true },
+  );
+};
 
+const getElements = () => ({
+  modal: document.querySelector(".detail-product"),
+  close: document.querySelector(".detail-product__close"),
+  overlay: document.querySelector(".overlay"),
+  image: document.querySelector(".detail-product__image"),
+  stock: document.querySelector(".detail-product__stock"),
+  title: document.querySelector(".detail-product__title"),
+  saving: document.querySelector(".detail-product__saving"),
+  priceCurrent: document.querySelector(".detail-product__price-current"),
+  priceOld: document.querySelector(".detail-product__price-old"),
+  discount: document.querySelector(".detail-product__discount-badge"),
+});
 
+const showModal = (elements) => {
+  elements.modal.classList.add("overlay--show");
+  elements.overlay.classList.add("overlay--show");
+  document.body.classList.add("overlay-open");
+};
 
+const hideModal = (elements) => () => {
+  elements.modal.classList.remove("overlay--show");
+  elements.overlay.classList.remove("overlay--show");
+  document.body.classList.remove("overlay-open");
+};
 
+const calculateOldPrice = (price, discountPercent) => {
+  if (discountPercent <= 0) return null;
+  return Math.round(price / (1 - discountPercent / 100));
+};
+
+const calculateSaving = (oldPrice, price) => {
+  return oldPrice ? oldPrice - price : 0;
+};
+
+const fillProductData = (elements, product) => {
+  console.log(elements, product);
+
+  const { image, stock, title, saving, priceCurrent, priceOld, discount } =
+    elements;
+  const {
+    image: productImage,
+    stockQuantity,
+    title: productTitle,
+    price,
+    discountPercent,
+  } = product;
+
+  image.src = productImage;
+  stock.innerHTML = `${stockQuantity} عدد مانده !`;
+  title.innerHTML = productTitle;
+  priceCurrent.innerHTML = price.toLocaleString() + " تومان";
+  discount.innerHTML = `${discountPercent} %`;
+  const oldPrice = calculateOldPrice(price, discountPercent);
+  if (oldPrice) {
+    const savingAmount = calculateSaving(oldPrice, price);
+    saving.innerHTML = `با خرید هر عدد ${savingAmount.toLocaleString()} تومان صرفه جویی کنید!`;
+  }
+};
 
 const tamplateProduct = (products, container) => {
   products.forEach((product) => {
@@ -191,5 +249,5 @@ export {
   renderFresherProduct,
   prepareQuickly,
   renderBrandBanner,
-  goToDetail
+  goToDetail,
 };
