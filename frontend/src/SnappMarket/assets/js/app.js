@@ -12,9 +12,6 @@ window.goToDetail=goToDetail
 
 const btn = document.querySelector(".back-to-top__btn");
 const stopSection = document.querySelector(".back-to-top");
-const detailProductClose = document.querySelector(".detail-product__close");
-const overlay = document.querySelector(".overlay");
-const detailProduct = document.querySelector(".detail-product");
 const bannerProduct = document.querySelectorAll(
   ".banner-product__image-wapper",
 );
@@ -37,16 +34,6 @@ window.addEventListener("scroll", function () {
     btn.classList.remove("show");
   }
 });
-
-// const toggleOverlay = (status) => {
-//   const action = status ? "add" : "remove";
-//   overlay.classList[action]("overlay--show");
-//   detailProduct.classList[action]("overlay--show");
-//   document.body.classList[action]("overlay-open");
-// };
-
-// const openDetail = () => toggleOverlay(true);
-// const closeDetail = () => toggleOverlay(false);
 
 const loginDrooDownHandler = () => {
   loginBody.classList.toggle("show-panel");
@@ -87,8 +74,4 @@ document.addEventListener("DOMContentLoaded", function () {
   renderBrandBanner();
 });
 
-// bannerProduct.forEach((item) => {
-//   item.addEventListener("click", openDetail);
-// });
-// detailProductClose.addEventListener("click", closeDetail);
 export { setupLoginDropdown };
